@@ -6,31 +6,32 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Solenoid;
 
 //import edu.wpi.first.wpilibj.Encoder;
 
 public class Elevator {
 	private static TalonSRX left, right;
 	private static Elevator instance;
-	private static DigitalInput limitSwitch1, limitSwitch2;
+	private static DigitalInput bottomLimitSwitch, topLimitSwitch;
 	private static PIDController pid;
+	private static Solenoid whip;
 	
-	
-	public Elevator getInstance(){
+	public static Elevator getInstance(){
 		if (instance == null){
 			instance = new Elevator();
 		}
 		return instance;
 	}
 	
-	
 	private Elevator(){
 		left = new TalonSRX(Constants.ELEVATOR_TALON_LEFT); // slave
 		right = new TalonSRX(Constants.ELEVATOR_TALON_RGIHT); // master
-		limitSwitch1 = new DigitalInput(Constants.ELEVATOR_LS1);
-		limitSwitch2 = new DigitalInput(Constants.ELEVATOR_LS2);
+		bottomLimitSwitch = new DigitalInput(Constants.ELEVATOR_BOTTOM_LIMITSWITCH);
+		topLimitSwitch = new DigitalInput(Constants.ELEVATOR_TOP_LIMITSWITCH);
 		left.set(ControlMode.Follower, right.getDeviceID());
 		right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+		whip = new Solenoid(Constants.ELEVATOR_SOLENOID);
 		left.config_kP(0, Constants.ELEAVTOR_PID_P, 10);
 		left.config_kI(0, Constants.ELEAVTOR_PID_I, 10);
 		left.config_kD(0, Constants.ELEAVTOR_PID_D, 10);
@@ -51,8 +52,12 @@ public class Elevator {
 		left.set(ControlMode.Position, position);
 	}
 	
-	public static boolean getLimitSwitches(){
-		return limitSwitch1.get();
+	public static boolean getBottomLimitSwitch(){
+		return bottomLimitSwitch.get();
+	}
+	
+	public static boolean getTopLimitSwitch(){
+		return topLimitSwitch.get();
 	}
 	
 	public static void stop(){
@@ -64,7 +69,7 @@ public class Elevator {
 	}
 	
 	public static void calibrateEncoder(){
-		if(!getLimitSwitches()){
+		if(!getBottomLimitSwitch()){
 			setPower(Constants.ELEVATOR_DOWNPOWER);
 		}
 		else{
@@ -93,5 +98,19 @@ public class Elevator {
 		Elevator.setPosition(Constants.ELEVATOR_SCALE_DOWN);
 	}
 	
+	public static void setElevatorOut(){
+		whip.set(true);
+	}
+	
+	public static void setElevatorIn(){
+		whip.set(false);
+	}
+	
+	public static void stopTop(double power){
+		if(getTopLimitSwitch())
+			stop();
+		else
+			setPosition(power);
+	}
 	
 }

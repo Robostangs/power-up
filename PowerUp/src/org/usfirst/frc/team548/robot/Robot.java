@@ -27,7 +27,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		DriveTrain.getInstance();
-		driver = new XBoxController(0);
+		Elevator.getInstance();
+
 	}
 
 	/**
@@ -57,16 +58,13 @@ public class Robot extends IterativeRobot {
 	/**
 	 * This function is called periodically during operator control.
 	 */
+	public void teleopInit(){
+		TeleOp.init();
+	}
+	
 	@Override
 	public void teleopPeriodic() {
-		DriveTrain.arcadeDrive(driver.getRightStickYAxis(), Utils.negPowTwo(driver.getLeftStickXAxis()));
-		
-		
-		if(driver.getRightBumper()){
-			DriveTrain.blaze(true);
-		}
-		else
-			DriveTrain.blaze(false);
+		TeleOp.run();
 	}
 
 	/**
