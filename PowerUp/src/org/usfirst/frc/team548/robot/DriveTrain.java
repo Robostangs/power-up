@@ -31,7 +31,7 @@ public static DriveTrain instance;
 		leftFront = new TalonSRX(Constants.DT_TALON_LEFTFRONT);
 		leftBack = new TalonSRX(Constants.DT_TALON_LEFTBACK); // has encoder
 		sol = new Solenoid(Constants.DT_SOLENOID_SHIFTER);
-		hyro = new AHRS(SerialPort.Port.kUSB);
+		hyro = new AHRS(SerialPort.Port.kMXP);
 		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		leftBack.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		pid = new PIDController(Constants.DT_PID_P, Constants.DT_PID_I, Constants.DT_PID_D, hyro, this);
@@ -103,6 +103,14 @@ public static DriveTrain instance;
 		drive(output, -output);	
 	}
 	
+	public static void resetGyro(){
+		hyro.reset();
+	}
+	
+	public static double getRoll(){
+		return hyro.getRoll();
+	}
+	
 	public static void driveStraight(double power){
 		if(power > 0){
 			if(getAngle() > Constants.DT_DRIVE_STRAIGHT)
@@ -120,6 +128,19 @@ public static DriveTrain instance;
 			else
 				drive(power, power);
 		}
-			
+	}
+	
+	public static double getPitch(){
+		return hyro.getPitch();
+	}
+	
+	public static void preventTip(){
+		while(Math.abs(DriveTrain.getRoll()) > 10){
+			if(DriveTrain.getRoll() > 10){
+				DriveTrain.drive(.5, .5);
+			}
+			else
+				DriveTrain.drive(-.5, -.5);
+		}
 	}
 }

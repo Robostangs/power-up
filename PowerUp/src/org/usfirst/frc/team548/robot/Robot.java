@@ -22,13 +22,14 @@ public class Robot extends IterativeRobot {
 	
 	
 	XBoxController driver;
-	
+	XBoxController manip;
 	
 	@Override
 	public void robotInit() {
 		DriveTrain.getInstance();
 		Elevator.getInstance();
-
+		driver = new XBoxController(0);
+		manip = new XBoxController(1);
 	}
 
 	/**
@@ -59,12 +60,40 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control.
 	 */
 	public void teleopInit(){
-		TeleOp.init();
+		//TeleOp.init();
+		
+		//if(driver.getAButton())
+			//Elevator.setElevatorOut();
 	}
 	
 	@Override
 	public void teleopPeriodic() {
-		TeleOp.run();
+		//DriveTrain.preventTip();
+		
+		//TeleOp.run();
+		
+		
+		//if(driver.getAButton()){
+			Elevator.setElevatorOut();
+		//}
+		//else
+		//	Elevator.setElevatorIn();
+		
+		DriveTrain.arcadeDrive(driver.getRightStickYAxis(), Utils.negPowTwo(driver.getLeftStickXAxis()));
+		
+		if(driver.getRightBumper()){
+			DriveTrain.setHighGear(true);
+		}
+		else
+			DriveTrain.setHighGear(false);	
+		
+		
+		Elevator.setPower(manip.getRightStickYAxis());
+		
+		SmartDashboard.putNumber("Pitch", DriveTrain.getRoll());
+		SmartDashboard.putNumber("eleavtor encoder", Elevator.getPosition());
+		SmartDashboard.putNumber("Angle", DriveTrain.getAngle());
+		
 	}
 
 	/**

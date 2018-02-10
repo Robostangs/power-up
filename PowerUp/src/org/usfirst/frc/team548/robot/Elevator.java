@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -15,7 +16,10 @@ public class Elevator {
 	private static Elevator instance;
 	private static DigitalInput bottomLimitSwitch, topLimitSwitch;
 	private static PIDController pid;
-	private static Solenoid whip;
+	private static DoubleSolenoid whip1;
+	
+	
+	//public static final DoubleSolenoid.Value kOff;
 	
 	public static Elevator getInstance(){
 		if (instance == null){
@@ -25,13 +29,16 @@ public class Elevator {
 	}
 	
 	private Elevator(){
+		
+		
 		left = new TalonSRX(Constants.ELEVATOR_TALON_LEFT); // slave
 		right = new TalonSRX(Constants.ELEVATOR_TALON_RGIHT); // master
 		bottomLimitSwitch = new DigitalInput(Constants.ELEVATOR_BOTTOM_LIMITSWITCH);
 		topLimitSwitch = new DigitalInput(Constants.ELEVATOR_TOP_LIMITSWITCH);
-		left.set(ControlMode.Follower, right.getDeviceID());
-		right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-		whip = new Solenoid(Constants.ELEVATOR_SOLENOID);
+		right.set(ControlMode.Follower, left.getDeviceID());
+		left.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+		whip1 = new DoubleSolenoid(5, 6);
+		//whip2 = new Solenoid(Constants.ELEVATOR_SOLENOID2);
 		left.config_kP(0, Constants.ELEAVTOR_PID_P, 10);
 		left.config_kI(0, Constants.ELEAVTOR_PID_I, 10);
 		left.config_kD(0, Constants.ELEAVTOR_PID_D, 10);
@@ -44,8 +51,8 @@ public class Elevator {
 		
 	}
 	
-	public static int getPosition(){
-		return right.getSensorCollection().getPulseWidthPosition();
+	public static double getPosition(){
+		return left.getSensorCollection().getPulseWidthPosition();
 	}
 	
 	public static void setPosition(double position){
@@ -99,12 +106,24 @@ public class Elevator {
 	}
 	
 	public static void setElevatorOut(){
-		whip.set(true);
+		whip1.set(DoubleSolenoid.Value.kForward);
+		//whip2.set(true);
 	}
 	
 	public static void setElevatorIn(){
-		whip.set(false);
+		whip1.set(DoubleSolenoid.Value.kReverse);
 	}
+	
+	public static boolean checkLimitSwitches(boolean limitSwitch){
+		if(limitSwitch && !limitSwitch){
+			//This means that there is something that has gone wrong
+			return false;
+		}
+		else
+			//this means that it is working
+			return true;
+	}
+	
 	
 	public static void stopTop(double power){
 		if(getTopLimitSwitch())

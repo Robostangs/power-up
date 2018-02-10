@@ -28,7 +28,7 @@ public class TeleOp {
 		
 		
 		//Manip
-		Elevator.setPosition(manip.getRightStickYAxis());
+		Elevator.setPower(manip.getRightStickYAxis());
 		
 		if(manip.getAButton())
 			Elevator.calibrateEncoder();

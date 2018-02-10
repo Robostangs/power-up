@@ -1,5 +1,7 @@
 package org.usfirst.frc.team548.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 public class Constants {
 	//Drive Train
 	public static final int DT_TALON_RIGHTFRONT = 1; // has encoder
@@ -16,8 +18,8 @@ public class Constants {
 	//Elevator
 	public static final int ELEVATOR_TOP_LIMITSWITCH = 1;
 	public static final int ELEVATOR_BOTTOM_LIMITSWITCH = 2;
-	public static final int ELEVATOR_TALON_RGIHT = 0;
-	public static final int ELEVATOR_TALON_LEFT = 0;
+	public static final int ELEVATOR_TALON_RGIHT = 7;
+	public static final int ELEVATOR_TALON_LEFT = 8;
 	public static final double ELEVATOR_DOWNPOWER = -.20;
 	public static final double ELEVATOR_DOWN = 0;
 	public static final double ELEVATOR_SWITCH  = 0 + 0;
@@ -28,7 +30,10 @@ public class Constants {
 	public static final double ELEAVTOR_PID_I = 0;
 	public static final double ELEAVTOR_PID_D = 0;
 	public static final double ELEAVTOR_PID_F = 0;
-	public static final int ELEVATOR_SOLENOID = 0;
+	public static final int ELEVATOR_SOLENOID1 = 7;
+	public static final int ELEVATOR_SOLENOID2 = 6;
+	//public static final DoubleSolenoid.Value
+	
 	
 	//TeleOp
 	public static final int XB_POS_DRIVER = 0;
