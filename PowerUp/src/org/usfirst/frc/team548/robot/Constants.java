@@ -20,13 +20,13 @@ public class Constants {
 	public static final int ELEVATOR_BOTTOM_LIMITSWITCH = 2;
 	public static final int ELEVATOR_TALON_RGIHT = 7;
 	public static final int ELEVATOR_TALON_LEFT = 8;
-	public static final double ELEVATOR_DOWNPOWER = -.20;
+	public static final double ELEVATOR_DOWNPOWER = -.1;
 	public static final double ELEVATOR_DOWN = 0;
 	public static final double ELEVATOR_SWITCH  = 0 + 0;
 	public static final double ELEVATOR_SCALE_DOWN = 0 + 0;
 	public static final double ELEVATOR_SCALE_EVEN = 0 + 0;
 	public static final double ELEVATOR_SCALE_UP= 0 + 0;
-	public static final double ELEAVTOR_PID_P = 0;
+	public static final double ELEAVTOR_PID_P = 1;
 	public static final double ELEAVTOR_PID_I = 0;
 	public static final double ELEAVTOR_PID_D = 0;
 	public static final double ELEAVTOR_PID_F = 0;
@@ -37,5 +37,6 @@ public class Constants {
 	
 	//TeleOp
 	public static final int XB_POS_DRIVER = 0;
-	public static final int XB_POS_MANIP = 0;
+	public static final int XB_POS_MANIP = 1;
 }
+

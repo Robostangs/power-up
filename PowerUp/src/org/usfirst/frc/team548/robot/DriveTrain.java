@@ -57,7 +57,7 @@ public static DriveTrain instance;
 	}
 	
 	public static void setHighGear(boolean b){
-		sol.set(b);
+		sol.set(!b);
 	}
 	
 	public static double getAngle(){

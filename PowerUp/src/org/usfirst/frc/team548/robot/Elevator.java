@@ -19,6 +19,7 @@ public class Elevator {
 	private static DoubleSolenoid whip1;
 	
 	
+	
 	//public static final DoubleSolenoid.Value kOff;
 	
 	public static Elevator getInstance(){
@@ -38,21 +39,27 @@ public class Elevator {
 		right.set(ControlMode.Follower, left.getDeviceID());
 		left.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		whip1 = new DoubleSolenoid(5, 6);
-		//whip2 = new Solenoid(Constants.ELEVATOR_SOLENOID2);
-		left.config_kP(0, Constants.ELEAVTOR_PID_P, 10);
-		left.config_kI(0, Constants.ELEAVTOR_PID_I, 10);
-		left.config_kD(0, Constants.ELEAVTOR_PID_D, 10);
-		left.config_kF(0, Constants.ELEAVTOR_PID_F, 10);
+		left.config_kP(0, Constants.ELEAVTOR_PID_P, 0);
+		left.config_kI(0, Constants.ELEAVTOR_PID_I, 0);
+		left.config_kD(0, Constants.ELEAVTOR_PID_D, 0);
+		left.config_kF(0, Constants.ELEAVTOR_PID_F, 0);
+		//left.setInverted(false);
+		//right.setInverted(true);
+		left.setSensorPhase(true);
 		
 	}
 	
 	public static void setPower(double power){
-		left.set(ControlMode.PercentOutput, power);
-		
+		if(Math.abs(power) < .05)
+			left.set(ControlMode.PercentOutput, 0);
+		else if(Math.abs(power) < .1)
+			left.set(ControlMode.PercentOutput, 0);
+		else
+			left.set(ControlMode.PercentOutput, power);
 	}
 	
 	public static double getPosition(){
-		return left.getSensorCollection().getPulseWidthPosition();
+		return left.getSelectedSensorPosition(0);
 	}
 	
 	public static void setPosition(double position){
@@ -72,11 +79,12 @@ public class Elevator {
 	}
 	
 	public static void resetEncoder(){
-		left.getSensorCollection().setPulseWidthPosition(0, 10);
+		left.setSelectedSensorPosition(0, 0, 10);
+		
 	}
 	
 	public static void calibrateEncoder(){
-		if(!getBottomLimitSwitch()){
+		if(getBottomLimitSwitch()){
 			setPower(Constants.ELEVATOR_DOWNPOWER);
 		}
 		else{
@@ -114,6 +122,10 @@ public class Elevator {
 		whip1.set(DoubleSolenoid.Value.kReverse);
 	}
 	
+	public static void kindaReset(){
+		left.setSelectedSensorPosition(0, 0, 10);
+	}
+	
 	public static boolean checkLimitSwitches(boolean limitSwitch){
 		if(limitSwitch && !limitSwitch){
 			//This means that there is something that has gone wrong
@@ -124,6 +136,20 @@ public class Elevator {
 			return true;
 	}
 	
+	public static void moveToPosition(double pos){
+		//if(getPosition() > pos){
+		while(Elevator.getPosition() > pos)
+			Elevator.setPower(.5);
+		
+		//while(Elevator.getPosition() < pos)
+			//Elevator.setPower(-.5);
+	//	}
+	//	else if(getPosition() < pos){
+	//		while(Elevator.getPosition() < pos)
+	//			Elevator.setPower(-.5);
+	//	}
+			
+	}
 	
 	public static void stopTop(double power){
 		if(getTopLimitSwitch())
