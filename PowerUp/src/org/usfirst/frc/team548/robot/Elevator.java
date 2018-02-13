@@ -50,13 +50,19 @@ public class Elevator {
 	}
 	
 	public static void setPower(double power){
-		if(Math.abs(power) < .05)
-			left.set(ControlMode.PercentOutput, 0);
-		else if(Math.abs(power) < .1)
-			left.set(ControlMode.PercentOutput, 0);
+		
+		if(Math.abs(power) < .1)
+			Elevator.stop();
 		else
 			left.set(ControlMode.PercentOutput, power);
 	}
+	
+	/*
+	public static void setAlwaysPower(){
+		if(getPosition() > 400 && Math.abs(getAmountPower()) <.1 )
+			left.set(ControlMode.PercentOutput, .14);
+	}
+	*/
 	
 	public static double getPosition(){
 		return left.getSelectedSensorPosition(0);
@@ -122,10 +128,6 @@ public class Elevator {
 		whip1.set(DoubleSolenoid.Value.kReverse);
 	}
 	
-	public static void kindaReset(){
-		left.setSelectedSensorPosition(0, 0, 10);
-	}
-	
 	public static boolean checkLimitSwitches(boolean limitSwitch){
 		if(limitSwitch && !limitSwitch){
 			//This means that there is something that has gone wrong
@@ -136,19 +138,9 @@ public class Elevator {
 			return true;
 	}
 	
-	public static void moveToPosition(double pos){
-		//if(getPosition() > pos){
-		while(Elevator.getPosition() > pos)
-			Elevator.setPower(.5);
-		
-		//while(Elevator.getPosition() < pos)
-			//Elevator.setPower(-.5);
-	//	}
-	//	else if(getPosition() < pos){
-	//		while(Elevator.getPosition() < pos)
-	//			Elevator.setPower(-.5);
-	//	}
-			
+	public static void powerBottom(){
+		if(Elevator.getPosition() < 10000 && left.getMotorOutputPercent() < -.11)
+			Elevator.setPower(-.1);
 	}
 	
 	public static void stopTop(double power){
@@ -156,6 +148,10 @@ public class Elevator {
 			stop();
 		else
 			setPosition(power);
+	}
+	
+	public static double getAmountPower(){
+		return left.getMotorOutputPercent();
 	}
 	
 }

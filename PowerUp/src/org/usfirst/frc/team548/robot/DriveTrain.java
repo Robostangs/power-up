@@ -134,6 +134,13 @@ public static DriveTrain instance;
 		return hyro.getPitch();
 	}
 	
+	public static void stop(){
+		rightFront.set(ControlMode.PercentOutput, 0);
+		rightBack.set(ControlMode.PercentOutput, 0);
+		leftBack.set(ControlMode.PercentOutput, 0);
+		leftFront.set(ControlMode.PercentOutput, 0);
+	}
+	
 	public static void preventTip(){
 		while(Math.abs(DriveTrain.getRoll()) > 10){
 			if(DriveTrain.getRoll() > 10){

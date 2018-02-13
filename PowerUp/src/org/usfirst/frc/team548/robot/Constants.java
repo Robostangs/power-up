@@ -32,8 +32,17 @@ public class Constants {
 	public static final double ELEAVTOR_PID_F = 0;
 	public static final int ELEVATOR_SOLENOID1 = 7;
 	public static final int ELEVATOR_SOLENOID2 = 6;
-	//public static final DoubleSolenoid.Value
 	
+	//Elevator
+	public static final int INGESTOR_TALON_RIGHT = 6;
+	public static final int INGESTOR_TALONG_LEFT = 9;
+	public static final int INGESTOR_CURRENT_CONSTANT = 4;
+	public static final int INGESTOR_CURRENT_TIMER = 15;
+	
+	//Climber
+	public static final int CLIMBER_TALON_UN = 0;
+	public static final int CLIMBER_TALON_DEUX = 0;
+	public static final int CLIMBER_TALON_TROIS = 0;
 	
 	//TeleOp
 	public static final int XB_POS_DRIVER = 0;
