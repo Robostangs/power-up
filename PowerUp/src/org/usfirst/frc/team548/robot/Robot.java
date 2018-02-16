@@ -32,22 +32,26 @@ public class Robot extends IterativeRobot {
 		PDP = new PowerDistributionPanel();
 		
 		autoChooser = new SendableChooser<AutoMode>();
-		autoChooser.addDefault("Cross Baseline", new DriveStraight());
+		autoChooser.addDefault("Test Auto", new DriveStraight());
 		
 		SmartDashboard.putData("Auto mode", autoChooser);
-		SmartDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());
+		//SmartDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());
+		
+		
 	}
 	
 	@Override
 	public void autonomousInit() {
+		DriveTrain.resetGyro();
 		autoChooser.getSelected().start();
-		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-	
+		SmartDashboard.putNumber("Drive Train", DriveTrain.getEncoderAverage());
+		SmartDashboard.putNumber("AUTO GYRO", DriveTrain.getAngle());
 	}
 
 	@Override

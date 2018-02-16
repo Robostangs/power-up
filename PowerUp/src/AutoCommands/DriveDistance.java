@@ -13,14 +13,14 @@ public class DriveDistance extends AutoCommandBase{
 	
 	public void init(){
 		DriveTrain.resetEncoder();
-		DriveTrain.resetGyro();
+		//DriveTrain.resetGyro();
 	}
 
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		while(DriveTrain.getEncoderAverage() < distance){
-			DriveTrain.driveStraight(power);
+		while(Math.abs(DriveTrain.getEncoderAverage()) < Math.abs(distance)){
+			DriveTrain.drive(power, power);
 		}
 		DriveTrain.stop();
 	}

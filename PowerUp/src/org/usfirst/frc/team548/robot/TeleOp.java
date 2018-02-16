@@ -19,7 +19,7 @@ public class TeleOp {
 	
 	public static void init(){
 		//DriveTrain.resetEncoder();
-		Elevator.setElevatorOut();
+		Elevator.setElevatorIn();
 		//Elevator.resetEncoder();
 	}
 	
@@ -30,37 +30,54 @@ public class TeleOp {
 		DriveTrain.arcadeDrive(driver.getRightStickYAxis(), Utils.negPowTwo(driver.getLeftStickXAxis()));
 		
 		if(driver.getRightBumper()){
-			DriveTrain.setHighGear(true);
+			DriveTrain.setHighGear(false);
 		}
 		else
-			DriveTrain.setHighGear(false);	
+			DriveTrain.setHighGear(true);	
 		
 		//Manip
-		Elevator.setPower(manip.getRightStickYAxis());
 		
-		if(manip.getRightBumper()){
+		
+		if(manip.getRightBumper())
 			Climber.climb(manip.getRightStickYAxis());
+		else{ 
+			Elevator.setPower(manip.getRightStickYAxis());
+			Climber.climb(0);
 		}
 		
-		if(manip.getAButton())
-			Elevator.resetEncoder();
-		if(manip.getBButton())
-			Elevator.calibrateEncoder();
-		if(manip.getXButton())
-			Elevator.setPosition(30000);
-		if(manip.getBackButton())
+		if(driver.getAButton())
+			DriveTrain.resetEncoder();
+		if(driver.getBButton())
+			DriveTrain.resetGyro();
+		if(driver.getXButton())
+			DriveTrain.turnToAngle(-30);
+		if(manip.getYButton())
 			Elevator.setElevatorIn();
+		//else
+		//	Elevator.setElevatorOut();
+		//Ingestor.ingestCurentLimiting();
 		
 		
-		Ingestor.ingestCurentLimiting();
-		Ingestor.leftControl(manip.getLeftTriggerAxis());
-		Ingestor.rightControl(manip.getRightTriggerAxis());
-		if(Ingestor.isGearInIngestor()){
-			manip.setLeftRumble(1);
-			driver.setLeftRumble(1);
+		
+		if(manip.getBackButton()){
+			Ingestor.leftControl(.5);
+			Ingestor.rightControl(-.5);
 		}
+		else if(manip.getStartButton()){
+			Ingestor.leftControl(-.5);
+			Ingestor.rightControl(.5);
+		}
+		else 
+			Ingestor.bothControl(-manip.getLeftStickYAxis());
+			
 		
-		Ingestor.bothControl(manip.getLeftStickYAxis());
+		
+		//if(Ingestor.isGearInIngestor()){
+		//	manip.setLeftRumble(1);
+		//	driver.setLeftRumble(1);
+		//}
+		
+		
 			
 		
 		
@@ -68,10 +85,10 @@ public class TeleOp {
 		SmartDashboard.putNumber("DT Encoder", DriveTrain.getEncoderAverage());
 		//SmartDashboard.putNumber("Pitch", DriveTrain.getRoll());
 		SmartDashboard.putNumber("eleavtor encoder", Elevator.getPosition());
-		//SmartDashboard.putNumber("Angle", DriveTrain.getAngle());
+		SmartDashboard.putNumber("Angle", DriveTrain.getAngle());
 		//SmartDashboard.putBoolean("Limit Switch Error", Elevator.checkLimitSwitches(Elevator.getBottomLimitSwitch()));
 		SmartDashboard.putBoolean("Switch", Elevator.getBottomLimitSwitch());
-		//SmartDashboard.putNumber("xbox", manip.getRightStickYAxis());
+		SmartDashboard.putNumber("xbox", manip.getLeftStickYAxis());
 		SmartDashboard.putNumber("Elevator power", Elevator.getAmountPower());		
 	}
 	

@@ -62,23 +62,21 @@ public static DriveTrain instance;
 	
 	public static double getAngle(){
 		return hyro.getAngle();
-	}
-	
-	public static void resetHyro(){
-		hyro.reset();
+		
 	}
 	
 	public static double getRightEncoderDistance(){
-		return (rightFront.getSensorCollection().getPulseWidthPosition());
+		return (rightFront.getSelectedSensorPosition(0));
 	}
 	
 	public static double getLeftEncoderDistance(){
-		return -(leftBack.getSensorCollection().getPulseWidthPosition());
+		return -(leftBack.getSelectedSensorPosition(0));
 	}
 	
 	public static void resetEncoder(){
-		leftBack.getSensorCollection().setPulseWidthPosition(0, 10);	
-		rightFront.getSensorCollection().setPulseWidthPosition(0, 10);	
+		leftBack.setSelectedSensorPosition(0, 0, 10);
+		rightFront.setSelectedSensorPosition(0, 0, 10);
+		
 	}
 	
 	public static double getEncoderAverage(){
@@ -90,8 +88,15 @@ public static DriveTrain instance;
 	}
 	
 	public static void turnToAngle(double angle){
-		pid.enable();
 		pid.setSetpoint(angle);
+		if (!pid.isEnabled()) {
+			pid.reset();
+			pid.enable();
+		}
+	}
+	
+	public static void disablePID() {
+		pid.disable();
 	}
 	
 	public void pidWrite(double output) {

@@ -10,10 +10,10 @@ public class Constants {
 	public static final int DT_TALON_LEFTBACK = 14; // has encoder
 	public static final int DT_SOLENOID_SHIFTER = 4;
 	public static final boolean DT_SOLENOID_BOOLEAN = true;
-	public static final double DT_PID_P = 0;
+	public static final double DT_PID_P = 0.025d;
 	public static final double DT_PID_I = 0;
-	public static final double DT_PID_D = 0;
-	public static final double DT_DRIVE_STRAIGHT = 1.20;
+	public static final double DT_PID_D = 0.06d;
+	public static final double DT_DRIVE_STRAIGHT = .9;
 	
 	//Elevator
 	public static final int ELEVATOR_TOP_LIMITSWITCH = 1;
@@ -40,9 +40,9 @@ public class Constants {
 	public static final int INGESTOR_CURRENT_TIMER = 15;
 	
 	//Climber
-	public static final int CLIMBER_TALON_UN = 0;
-	public static final int CLIMBER_TALON_DEUX = 0;
-	public static final int CLIMBER_TALON_TROIS = 0;
+	public static final int CLIMBER_TALON_UN = 4;
+	public static final int CLIMBER_TALON_DEUX = 11;
+	public static final int CLIMBER_TALON_TROIS = 12;
 	
 	//TeleOp
 	public static final int XB_POS_DRIVER = 0;

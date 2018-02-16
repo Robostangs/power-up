@@ -51,8 +51,13 @@ public class Ingestor {
 	}
 	
 	public static void bothControl(double power){
+		if(Math.abs(power) < 0.15){
+			stop();
+		}
+		else{
 		right.set(ControlMode.PercentOutput, -power);
 		left.set(ControlMode.PercentOutput, power);
+		}
 	}
 	
 	public static void stop(){
