@@ -24,8 +24,7 @@ public class DriveStraight extends AutoMode {
 	//	else
 	//		DriveTrain.stop();
 			
-			
-		
+			///////;LHSF LA SHF
 		
 	}
 	
