@@ -3,7 +3,9 @@ package AutoModes;
 import AutoCommands.AutoCommandBase;
 import AutoCommands.DriveDistance;
 import AutoCommands.DropCube;
+import AutoCommands.OneSideTurn;
 import AutoCommands.TurnToAngle;
+import AutoCommands.Wait;
 
 
 public abstract class AutoMode {
@@ -19,13 +21,22 @@ public abstract class AutoMode {
 		runCommand(new DriveDistance(seconds, power, distance));
 	}
 	
-    protected void dropCube(double seconds, double power){
-    	runCommand(new DropCube(seconds, power));
+    protected void dropCube(double seconds, double powerLeft, double powerRight){
+    	runCommand(new DropCube(seconds, powerLeft, powerRight));
     }
     
-    protected void turnToAngle(double seconds, double angle, boolean reset){
-    	runCommand(new TurnToAngle(seconds, angle, reset));
+    protected void turnToAngle(double seconds, double angle, double power, boolean reset){
+    	runCommand(new TurnToAngle(seconds, angle, power,  reset));
     }
+    
+    protected void doubleSidePower(double seconds, double leftPower, double rightPower){
+    	runCommand(new OneSideTurn(seconds, leftPower, rightPower));
+    }
+    
+    protected void  waitTime(double seconds){
+    	runCommand(new Wait(seconds));
+    }
+    
 	private  void runCommand(AutoCommandBase command) {
 		// TODO Auto-generated method stub
 		command.execute();

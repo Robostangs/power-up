@@ -1,42 +1,39 @@
 package AutoCommands;
 
-import org.usfirst.frc.team548.robot.Ingestor;
+import org.usfirst.frc.team548.robot.DriveTrain;
 
-public class DropCube extends AutoCommandBase {
-	private double powerLeft, powerRight;
+public class OneSideTurn extends AutoCommandBase {
+	private static double right, left;
 	
-	public DropCube(double timeOut, double powerLeft,double powerRight) {
+	public OneSideTurn(double timeOut, double left, double right) {
 		super(timeOut);
 		// TODO Auto-generated constructor stub
-		this.powerLeft = powerLeft;
-		this.powerRight = powerRight;
+		this.right = right;
+		this.left = left;
 	}
 
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
 		
-		
 	}
 
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		Ingestor.leftControl(-powerRight);
-		Ingestor.rightControl(-powerLeft);
-		
+		DriveTrain.arcadeDrive(left, right);
 	}
 
 	@Override
 	public void end() {
 		// TODO Auto-generated method stub
-		Ingestor.stop();
+		DriveTrain.stop();
 	}
 
 	@Override
 	protected String getCommandName() {
 		// TODO Auto-generated method stub
-		return "Drop Cube";
+		return null;
 	}
 
 }

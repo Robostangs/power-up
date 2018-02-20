@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DriveTrain implements PIDOutput {
@@ -31,14 +32,14 @@ public static DriveTrain instance;
 		leftFront = new TalonSRX(Constants.DT_TALON_LEFTFRONT);
 		leftBack = new TalonSRX(Constants.DT_TALON_LEFTBACK); // has encoder
 		sol = new Solenoid(Constants.DT_SOLENOID_SHIFTER);
-		hyro = new AHRS(SerialPort.Port.kMXP);
+		hyro = new AHRS(SerialPort.Port.kUSB);
 		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		leftBack.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		pid = new PIDController(Constants.DT_PID_P, Constants.DT_PID_I, Constants.DT_PID_D, hyro, this);
 		pid.setInputRange(-180.0f,  180.0f);
-		pid.setOutputRange(-0.7f, 0.7f);
+		pid.setOutputRange(-0.5f, 0.5f);
 		pid.setAbsoluteTolerance(2f);
-        pid.setContinuous(true);
+        
 	}
 	
 	public static void drive(double leftPower, double rightPower){
@@ -46,6 +47,7 @@ public static DriveTrain instance;
 		rightBack.set(ControlMode.PercentOutput, -rightPower);
 		leftBack.set(ControlMode.PercentOutput, leftPower);
 		leftFront.set(ControlMode.PercentOutput, leftPower);
+		//DriveTrain.turnToAngle(90);
 	}
 	
 	public static void arcadeDrive(double fwd, double tur) {
@@ -71,6 +73,10 @@ public static DriveTrain instance;
 	
 	public static double getLeftEncoderDistance(){
 		return -(leftBack.getSelectedSensorPosition(0));
+	}
+	
+	public static double getPIDError(){
+		return pid.getError();
 	}
 	
 	public static void resetEncoder(){
@@ -99,13 +105,17 @@ public static DriveTrain instance;
 		pid.disable();
 	}
 	
+	public static void resetPID(){
+		pid.reset();
+	}
+	
 	public void pidWrite(double output) {
-		if(Math.abs(pid.getError()) < 5d){
-			pid.setPID(pid.getP(), .001, 0);
+		if(Math.abs(pid.getError()) < 90d){
+			pid.setPID(pid.getP(), pid.getI(), pid.getD());
 		}
 		else
-			pid.setPID(pid.getP(), 0, 0);
-		drive(output, -output);	
+		pid.setPID(pid.getP(), 0.001, 0.0);
+			drive(output, -output);	
 	}
 	
 	public static void resetGyro(){
@@ -119,20 +129,29 @@ public static DriveTrain instance;
 	public static void driveStraight(double power){
 		if(power > 0){
 			if(getAngle() > Constants.DT_DRIVE_STRAIGHT)
-				drive(power * .85, power * 1.15);
+				drive(power * .90, power * 1.10);
 			else if(getAngle() < -Constants.DT_DRIVE_STRAIGHT)
-				drive(power * 1.15, power * .85);
+				drive(power * 1.10, power * .90);
 			else
 				drive(power, power);
 		}
 		else{
 			if(getAngle() > Constants.DT_DRIVE_STRAIGHT)
-				drive(power * 1.15, power * .85);
+				drive(power * 1.10, power * .90);
 			else if(getAngle() < -Constants.DT_DRIVE_STRAIGHT)
-				drive(power * .85, power * 1.15);
+				drive(power * .90, power * 1.10);
 			else
 				drive(power, power);
 		}
+		
+	}
+	
+	
+	
+	
+	
+	public static double getRightPower(){
+		return rightFront.getMotorOutputPercent();
 	}
 	
 	public static double getPitch(){

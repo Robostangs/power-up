@@ -19,7 +19,7 @@ public class TeleOp {
 	
 	public static void init(){
 		//DriveTrain.resetEncoder();
-		Elevator.setElevatorIn();
+		Elevator.setElevatorOut();
 		//Elevator.resetEncoder();
 	}
 	
@@ -88,8 +88,10 @@ public class TeleOp {
 		SmartDashboard.putNumber("Angle", DriveTrain.getAngle());
 		//SmartDashboard.putBoolean("Limit Switch Error", Elevator.checkLimitSwitches(Elevator.getBottomLimitSwitch()));
 		SmartDashboard.putBoolean("Switch", Elevator.getBottomLimitSwitch());
-		SmartDashboard.putNumber("xbox", manip.getLeftStickYAxis());
-		SmartDashboard.putNumber("Elevator power", Elevator.getAmountPower());		
+		SmartDashboard.putNumber("xbox", driver.getLeftStickXAxis());
+		SmartDashboard.putNumber("Elevator power", Elevator.getAmountPower());
+		SmartDashboard.putNumber("right power dt", DriveTrain.getRightPower());
+		//SmartDashboard.putNumber("left power dt", DriveTrain.getLeftPower());
 	}
 	
 }

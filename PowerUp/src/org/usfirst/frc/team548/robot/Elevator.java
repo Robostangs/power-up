@@ -30,10 +30,8 @@ public class Elevator {
 	}
 	
 	private Elevator(){
-		
-		
-		left = new TalonSRX(Constants.ELEVATOR_TALON_LEFT); // slave
-		right = new TalonSRX(Constants.ELEVATOR_TALON_RGIHT); // master
+		left = new TalonSRX(Constants.ELEVATOR_TALON_LEFT); // master
+		right = new TalonSRX(Constants.ELEVATOR_TALON_RGIHT); // slave
 		bottomLimitSwitch = new DigitalInput(Constants.ELEVATOR_BOTTOM_LIMITSWITCH);
 		topLimitSwitch = new DigitalInput(Constants.ELEVATOR_TOP_LIMITSWITCH);
 		right.set(ControlMode.Follower, left.getDeviceID());
@@ -50,7 +48,6 @@ public class Elevator {
 	}
 	
 	public static void setPower(double power){
-		
 		if(Math.abs(power) < .1)
 			Elevator.stop();
 		else
