@@ -20,8 +20,7 @@ public class DriveDistance extends AutoCommandBase{
 	protected void run() {
 		// TODO Auto-generated method stub
 		while(Math.abs(DriveTrain.getEncoderAverage()) < Math.abs(distance)){
-			DriveTrain.driveStraight(power);
-			
+			DriveTrain.drive(power * .92, power );
 		}
 		DriveTrain.stop();
 		//DriveTrain.resetGyro();

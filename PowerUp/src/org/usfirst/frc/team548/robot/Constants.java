@@ -13,7 +13,7 @@ public class Constants {
 	public static final double DT_PID_P = 0.0105d;
 	public static final double DT_PID_I = 0.0016;
 	public static final double DT_PID_D = 0.0;
-	public static final double DT_DRIVE_STRAIGHT = .5;
+	public static final double DT_DRIVE_STRAIGHT = 1;
 	
 	//Elevator
 	public static final int ELEVATOR_TOP_LIMITSWITCH = 1;
@@ -30,8 +30,8 @@ public class Constants {
 	public static final double ELEAVTOR_PID_I = 0;
 	public static final double ELEAVTOR_PID_D = 0;
 	public static final double ELEAVTOR_PID_F = 0;
-	public static final int ELEVATOR_SOLENOID1 = 2;
-	public static final int ELEVATOR_SOLENOID2 = 3;
+	public static final int ELEVATOR_SOLENOID1 = 7;
+	public static final int ELEVATOR_SOLENOID2 = 6;
 	
 	//Elevator
 	public static final int INGESTOR_TALON_RIGHT = 6;
@@ -40,8 +40,8 @@ public class Constants {
 	public static final int INGESTOR_CURRENT_TIMER = 15;
 	
 	//Climber
-	public static final int CLIMBER_TALON_UN = 3;
-	public static final int CLIMBER_TALON_DEUX = 4;
+	public static final int CLIMBER_TALON_UN = 4;
+	public static final int CLIMBER_TALON_DEUX = 11;
 	public static final int CLIMBER_TALON_TROIS = 12;
 	
 	//TeleOp

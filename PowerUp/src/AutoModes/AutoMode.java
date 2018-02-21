@@ -25,8 +25,8 @@ public abstract class AutoMode {
     	runCommand(new DropCube(seconds, powerLeft, powerRight));
     }
     
-    protected void turnToAngle(double seconds, double angle, double power, boolean reset){
-    	runCommand(new TurnToAngle(seconds, angle, power,  reset));
+    protected void turnToAngle(double seconds, double angle, double power){
+    	runCommand(new TurnToAngle(seconds, angle, power));
     }
     
     protected void doubleSidePower(double seconds, double leftPower, double rightPower){

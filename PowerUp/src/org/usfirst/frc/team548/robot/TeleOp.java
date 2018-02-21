@@ -78,8 +78,9 @@ public class TeleOp {
 		//}
 		
 		
-		//this should not be where it is now in the master branch
 		
+		//Ingestor.rightControl(manip.getRightTriggerAxis());
+		//Ingestor.leftControl(manip.getLeftTriggerAxis());
 		
 		//SmartDashboard
 		SmartDashboard.putNumber("DT Encoder", DriveTrain.getEncoderAverage());

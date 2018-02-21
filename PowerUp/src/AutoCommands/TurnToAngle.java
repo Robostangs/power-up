@@ -6,43 +6,41 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TurnToAngle extends AutoCommandBase {
 	
-	double angle = 0;
-	boolean reset;
-	double power;
-	public TurnToAngle(double timeOut, double angle, double power, boolean r) {
+	private double angle = 0;
+	private double power;
+	
+	
+	public TurnToAngle(double timeOut, double angle, double power) {
 		super(timeOut);
 		// TODO Auto-generated constructor stub
 		this.angle = angle;
-		this.reset = r;
 		this.power = power;
 	}
 
-	@Override
+	
 	public void init() {
-		// TODO Auto-generated method stub
-		//if(reset) {
-			DriveTrain.resetGyro();
-			//DriveTrain.resetPID();
-		//}
+		DriveTrain.resetGyro();
 	}
 
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
 		//DriveTrain.turnToAngle(angle);
-		
-		SmartDashboard.putNumber("PID error", DriveTrain.getPIDError());
-		
-		int num = 0;
-		
-		while(DriveTrain.getAngle() < angle){
-			if(DriveTrain.getAngle() < (angle - 5))
+	//90 = 17
+		if(DriveTrain.getAngle() > 0){
+			if(DriveTrain.getAngle() < (angle -9))
 				DriveTrain.arcadeDrive(0, power);
-			else
-				DriveTrain.arcadeDrive(0, .2);
-			
+			else if(DriveTrain.getAngle() < angle && DriveTrain.getAngle() > angle - 9)
+				DriveTrain.arcadeDrive(0, .15);
 		}
-		DriveTrain.stop();
+		else{
+			if(DriveTrain.getAngle() > (angle +9))
+				DriveTrain.arcadeDrive(0, -power);
+			else if(DriveTrain.getAngle() > angle && DriveTrain.getAngle() < angle + 9)
+				DriveTrain.arcadeDrive(0, -.15);
+		}
+		
+		
 		
 	}
 
@@ -50,14 +48,17 @@ public class TurnToAngle extends AutoCommandBase {
 	public void end() {
 		// TODO Auto-generated method stub
 		DriveTrain.disablePID();
-		DriveTrain.resetEncoder();
-		SmartDashboard.putNumber("AUTO GYROOO", DriveTrain.getAngle());
+		System.out.println(DriveTrain.getAngle());
+		DriveTrain.resetGyro();
+		
+		//DriveTrain.resetEncoder();
+		//SmartDashboard.putNumber("AUTO GYROOO", DriveTrain.getAngle());
 	}
 
 	@Override
 	protected String getCommandName() {
 		// TODO Auto-generated method stub
-		return "Turn to angle";
+		return "turn to angle";
 	}
 
 }
