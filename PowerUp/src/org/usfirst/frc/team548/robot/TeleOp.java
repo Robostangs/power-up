@@ -44,20 +44,26 @@ public class TeleOp {
 			Elevator.setPower(manip.getRightStickYAxis());
 			Climber.climb(0);
 		}
+	
 		
-		if(driver.getAButton())
-			DriveTrain.resetEncoder();
+		if(manip.getAButton())
+			Ingestor.highPressure();
+		else
+			Ingestor.lowPressure();
 		if(driver.getBButton())
 			DriveTrain.resetGyro();
 		if(driver.getXButton())
 			DriveTrain.turnToAngle(-30);
+		/*
 		if(manip.getYButton())
 			Elevator.setElevatorIn();
+		else
+			Elevator.setElevatorOut();
 		//else
 		//	Elevator.setElevatorOut();
 		//Ingestor.ingestCurentLimiting();
 		
-		
+		*/
 		
 		if(manip.getBackButton()){
 			Ingestor.leftControl(.5);

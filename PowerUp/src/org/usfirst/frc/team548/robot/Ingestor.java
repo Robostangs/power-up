@@ -3,6 +3,7 @@ package org.usfirst.frc.team548.robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 
 public class Ingestor {
@@ -11,6 +12,7 @@ public class Ingestor {
 	private static TalonSRX right, left;
 	private static boolean currentLimiting = false, startedTimer = false;
 	private static Timer currentTimer;
+	private static Solenoid closeHeavy, closeLight;
 	
 	public static Ingestor getInstance(){
 		if(instance == null)
@@ -21,6 +23,8 @@ public class Ingestor {
 	private Ingestor(){
 		right = new TalonSRX(Constants.INGESTOR_TALON_RIGHT);
 		left = new TalonSRX(Constants.INGESTOR_TALONG_LEFT);
+		closeHeavy = new Solenoid(Constants.INGESTOR_SOLENOID_CLOSE_HEAVY);
+		//closeLight = new Solenoid(Constants.INGESTOR_SOLENOID_CLOSE_LIGHT);
 		currentTimer = new Timer();
 	}
 	
@@ -59,6 +63,23 @@ public class Ingestor {
 		left.set(ControlMode.PercentOutput, power);
 		}
 	}
+	
+	
+	public static void highPressure(){
+			closeHeavy.set(true);
+			//closeLight.set(false);
+	}
+	
+	public static void lowPressure(){
+		closeHeavy.set(false);
+		//closeLight.set(true);
+	}
+	
+	public static void openAll(){
+		closeHeavy.set(true);
+		//closeLight.set(true);
+	}
+	
 	
 	public static void stop(){
 		right.set(ControlMode.PercentOutput, 0);
