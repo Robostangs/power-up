@@ -8,7 +8,7 @@ public class Constants {
 	public static final int DT_TALON_RIGHTBACK = 2;
 	public static final int DT_TALON_LEFTFRONT = 13;
 	public static final int DT_TALON_LEFTBACK = 14; // has encoder
-	public static final int DT_SOLENOID_SHIFTER = 0;
+	public static final int DT_SOLENOID_SHIFTER = 4;
 	public static final boolean DT_SOLENOID_BOOLEAN = true;
 	public static final double DT_PID_P = 0.0105d;
 	public static final double DT_PID_I = 0.0016;

@@ -17,14 +17,19 @@ public class DriveStraight extends AutoMode {
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		driveDistance(1.2, -.6, -8960, 10);
 		if(gameData.charAt(0) == 'L'){
-			turnToAngle(1, -21, .5);
-			driveDistance(.7, -.7, (-26260 + 12 * 260), 10);
+			turnToAngle(1, -39, .5);
+			driveDistance(.7, -.7, (-19500), 10);
+			turnToAngle(1, 39, .5);
+			driveDistance(.7, -.5, (260 * 13), 10);
 			dropCube(.5, .7, .7);
 		}
 		else {
-			turnToAngle(1, 38, .5);
-			driveDistance(.7, -.7, (-26260 + 10 * 260), 10);
-			dropCube(.5, .7, .7);
+			turnToAngle(1, 35, .5);
+			//was 10 *
+			driveDistance(.7, -.7, (-26260 + 20 * 260), 10);
+			turnToAngle(1, -35, .5);
+			driveDistance(.7, -.5, (260 * 3), 10);
+			dropCube(.5, .6, .6);
 		}
 		
 	}
