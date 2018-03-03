@@ -1,6 +1,7 @@
 package AutoCommands;
 
 import org.usfirst.frc.team548.robot.DriveTrain;
+import org.usfirst.frc.team548.robot.Elevator;
 
 public class DriveDistance extends AutoCommandBase{
 	private double power, distance, threshold;
@@ -19,10 +20,13 @@ public class DriveDistance extends AutoCommandBase{
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		while(Math.abs(DriveTrain.getEncoderAverage()) < Math.abs(distance)){
-			DriveTrain.drive(power * .92, power );
+		if(Math.abs(DriveTrain.getEncoderAverage()) < Math.abs(distance)){
+			DriveTrain.drive(power, power * .95);
+			Elevator.setPosition(0);
 		}
-		DriveTrain.stop();
+		else
+			DriveTrain.stop();
+			Elevator.setPosition(0);
 		//DriveTrain.resetGyro();
 		
 	}
@@ -33,6 +37,7 @@ public class DriveDistance extends AutoCommandBase{
 		DriveTrain.stop();
 		//DriveTrain.resetGyro();
 		DriveTrain.resetEncoder();
+		Elevator.setPosition(0);
 	}
 
 	@Override

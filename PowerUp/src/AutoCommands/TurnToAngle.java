@@ -8,13 +8,15 @@ public class TurnToAngle extends AutoCommandBase {
 	
 	private double angle = 0;
 	private double power;
+	private double angleOffSet;
 	
 	
-	public TurnToAngle(double timeOut, double angle, double power) {
+	public TurnToAngle(double timeOut, double angle, double angleOffSet, double power) {
 		super(timeOut);
 		// TODO Auto-generated constructor stub
 		this.angle = angle;
 		this.power = power;
+		this.angleOffSet = angleOffSet;
 	}
 
 	
@@ -27,16 +29,17 @@ public class TurnToAngle extends AutoCommandBase {
 		// TODO Auto-generated method stub
 		//DriveTrain.turnToAngle(angle);
 	//90 = 17
+		//30 ==7
 		if(DriveTrain.getAngle() > 0){
-			if(DriveTrain.getAngle() < (angle -9))
+			if(DriveTrain.getAngle() < (angle - angleOffSet))
 				DriveTrain.arcadeDrive(0, power);
-			else if(DriveTrain.getAngle() < angle && DriveTrain.getAngle() > angle - 9)
+			else if(DriveTrain.getAngle() < angle && DriveTrain.getAngle() > angle - angleOffSet)
 				DriveTrain.arcadeDrive(0, .15);
 		}
 		else{
-			if(DriveTrain.getAngle() > (angle +9))
+			if(DriveTrain.getAngle() > (angle + angleOffSet))
 				DriveTrain.arcadeDrive(0, -power);
-			else if(DriveTrain.getAngle() > angle && DriveTrain.getAngle() < angle + 9)
+			else if(DriveTrain.getAngle() > angle && DriveTrain.getAngle() < angle + angleOffSet)
 				DriveTrain.arcadeDrive(0, -.15);
 		}
 		

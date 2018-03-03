@@ -1,45 +1,43 @@
 package AutoCommands;
 
 import org.usfirst.frc.team548.robot.Elevator;
-import org.usfirst.frc.team548.robot.Ingestor;
 
-public class DropCube extends AutoCommandBase {
-	private double powerLeft, powerRight;
+public class ArmGoUp extends AutoCommandBase {
+	public static boolean position;
 	
-	public DropCube(double timeOut, double powerLeft,double powerRight) {
+	public ArmGoUp(double timeOut, boolean pos) {
 		super(timeOut);
+		this.position = pos;
 		// TODO Auto-generated constructor stub
-		this.powerLeft = powerLeft;
-		this.powerRight = powerRight;
 	}
 
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
 		
+		Elevator.resetEncoder();
+
 	}
 
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		Ingestor.leftControl(-powerRight);
-		Ingestor.rightControl(-powerLeft);
-		
-		
+		Elevator.setElevatorOut();
+		Elevator.setPosition(0);
 	}
+	
 
 	@Override
 	public void end() {
 		// TODO Auto-generated method stub
-		Ingestor.stop();
 		Elevator.setElevatorOut();
-		
+		Elevator.setPosition(0);
 	}
 
 	@Override
 	protected String getCommandName() {
 		// TODO Auto-generated method stub
-		return "Drop Cube";
+		return null;
 	}
 
 }

@@ -50,9 +50,11 @@ public class TeleOp {
 		if(driver.getBButton())
 			DriveTrain.resetGyro();
 		if(driver.getXButton())
-			DriveTrain.turnToAngle(-30);
+			Elevator.resetEncoder();;
 		if(manip.getYButton())
 			Elevator.setElevatorIn();
+		//else
+		//	Elevator.setElevatorOut();
 		//else
 		//	Elevator.setElevatorOut();
 		//Ingestor.ingestCurentLimiting();

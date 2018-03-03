@@ -15,21 +15,27 @@ public class DriveStraight extends AutoMode {
 		
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		driveDistance(1.2, -.6, -8960, 10);
+		driveDistance(1.2, -.6, (-8960 + (2.5*260)), 10);
 		if(gameData.charAt(0) == 'L'){
-			turnToAngle(1, -39, .5);
-			driveDistance(.7, -.7, (-19500), 10);
-			turnToAngle(1, 39, .5);
-			driveDistance(.7, -.5, (260 * 13), 10);
+			turnToAngle(1, -30, 5, .5);
+			driveDistance(2, -.7, (-19500 + (260 * 5)), 10);
+			turnToAngle(1, 60, 8, .5);
+			driveDistance(1, -.5, (260 * 20), 10);
 			dropCube(.5, .7, .7);
+			armGoUp(1, true);
+			elevatotSet(2, -45500);
 		}
 		else {
-			turnToAngle(1, 35, .5);
+			turnToAngle(1, 35, 7, .5);
 			//was 10 *
 			driveDistance(.7, -.7, (-26260 + 20 * 260), 10);
-			turnToAngle(1, -35, .5);
+			turnToAngle(1, -35, 7, .5);
 			driveDistance(.7, -.5, (260 * 3), 10);
 			dropCube(.5, .6, .6);
+			armGoUp(2, true);
+			
+			//armGoUp(1, true);		
+			
 		}
 		
 	}
