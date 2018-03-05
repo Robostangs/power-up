@@ -19,7 +19,7 @@ public class TeleOp {
 	
 	public static void init(){
 		//DriveTrain.resetEncoder();
-		Elevator.setElevatorIn();
+		Elevator.setElevatorOut();
 		//Elevator.resetEncoder();
 	}
 	
@@ -45,16 +45,20 @@ public class TeleOp {
 			Climber.climb(0);
 		}
 	
+		//
 		
 		if(manip.getAButton())
 			Ingestor.highPressure();
 		else
 			Ingestor.lowPressure();
-		if(driver.getBButton())
-			DriveTrain.resetGyro();
-		if(driver.getXButton())
-			DriveTrain.turnToAngle(-30);
-		/*
+		if(manip.getBButton())
+			Elevator.resetEncoder();
+		if(manip.getXButton()){
+			Elevator.setPosition(20000);
+		}
+		//if(driver.getXButton())
+		//	DriveTrain.turnToAngle(-30);
+		
 		if(manip.getYButton())
 			Elevator.setElevatorIn();
 		else
@@ -63,7 +67,7 @@ public class TeleOp {
 		//	Elevator.setElevatorOut();
 		//Ingestor.ingestCurentLimiting();
 		
-		*/
+		
 		
 		if(manip.getBackButton()){
 			Ingestor.leftControl(.5);
