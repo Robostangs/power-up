@@ -92,6 +92,7 @@ public class TeleOp {
 		
 		
 		//SmartDashboard
+		SmartDashboard.putNumber("DT Gryo", DriveTrain.getAngle());
 		SmartDashboard.putNumber("DT Encoder", DriveTrain.getEncoderAverage());
 		//SmartDashboard.putNumber("Pitch", DriveTrain.getRoll());
 		SmartDashboard.putNumber("eleavtor encoder", Elevator.getPosition());
