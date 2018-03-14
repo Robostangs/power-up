@@ -4,13 +4,14 @@ import org.usfirst.frc.team548.robot.Elevator;
 import org.usfirst.frc.team548.robot.Ingestor;
 
 public class DropCube extends AutoCommandBase {
-	private double powerLeft, powerRight;
+	private double powerLeft, powerRight, elevatorSetPoint;
 	
-	public DropCube(double timeOut, double powerLeft,double powerRight) {
+	public DropCube(double timeOut, double powerLeft,double powerRight, double elevatorSetPoint) {
 		super(timeOut);
 		// TODO Auto-generated constructor stub
 		this.powerLeft = powerLeft;
 		this.powerRight = powerRight;
+		this.elevatorSetPoint = elevatorSetPoint;
 	}
 
 	@Override
@@ -24,7 +25,7 @@ public class DropCube extends AutoCommandBase {
 		// TODO Auto-generated method stub
 		Ingestor.leftControl(-powerRight);
 		Ingestor.rightControl(-powerLeft);
-		
+		Elevator.setPosition(elevatorSetPoint);
 		
 	}
 
@@ -32,7 +33,7 @@ public class DropCube extends AutoCommandBase {
 	public void end() {
 		// TODO Auto-generated method stub
 		Ingestor.stop();
-		Elevator.setElevatorOut();
+		//Elevator.setElevatorOut();
 		
 	}
 

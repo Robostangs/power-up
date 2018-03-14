@@ -11,6 +11,7 @@ import AutoModes.AutoMode;
 import AutoModes.DriveStraight;
 import AutoModes.LeftGoAround;
 import AutoModes.SwitchAuto;
+import AutoModes.SwitchAuto2;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -36,7 +37,8 @@ public class Robot extends IterativeRobot {
 		autoChooser = new SendableChooser<AutoMode>();
 		autoChooser.addDefault("Test Auto", new DriveStraight());
 		autoChooser.addDefault("left goaround",new LeftGoAround());
-		autoChooser.addDefault("scale auton test", new SwitchAuto());
+		autoChooser.addDefault("Scale/Switch Left", new SwitchAuto());
+		autoChooser.addDefault("Scale/Switch Right", new SwitchAuto2());
 		
 		SmartDashboard.putData("Auto mode", autoChooser);
 		//SmartDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());

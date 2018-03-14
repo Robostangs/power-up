@@ -44,7 +44,7 @@ public class Ingestor {
 		}
 		else{
 			right.set(ControlMode.PercentOutput, .25);
-			left.set(ControlMode.PercentOutput, .7);
+			left.set(ControlMode.PercentOutput, .25);
 			if(Robot.PDP.getCurrent(Constants.INGESTOR_CURRENT_CONSTANT) < 1);
 				currentLimiting = false;
 		}
@@ -73,7 +73,7 @@ public class Ingestor {
 		right.set(ControlMode.PercentOutput, -power);
 	}
 	
-	public static boolean isGearInIngestor() {
+	public static boolean isCubeInIngestor() {
 		return currentLimiting;
 	}
 }

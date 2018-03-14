@@ -19,16 +19,16 @@ public abstract class AutoMode {
 	
     protected abstract void run();
 
-    protected  void driveDistance(double seconds, double power, double distance, double threshold){
-		runCommand(new DriveDistance(seconds, power, distance));
+    protected  void driveDistance(double seconds, double power, double distance, double threshold, double elevatorSetPoint, double ingestorPower){
+		runCommand(new DriveDistance(seconds, power, distance, elevatorSetPoint, ingestorPower));
 	}
 	
-    protected void dropCube(double seconds, double powerLeft, double powerRight){
-    	runCommand(new DropCube(seconds, powerLeft, powerRight));
+    protected void dropCube(double seconds, double powerLeft, double powerRight, double elevatorSetPoint){
+    	runCommand(new DropCube(seconds, powerLeft, powerRight, elevatorSetPoint));
     }
     
-    protected void turnToAngle(double seconds, double angle, double offset, double power){
-    	runCommand(new TurnToAngle(seconds, angle, offset, power));
+    protected void turnToAngle(double seconds, double angle, double offset, double power, double setPoint){
+    	runCommand(new TurnToAngle(seconds, angle, offset, power, setPoint));
     }
     
     protected void doubleSidePower(double seconds, double leftPower, double rightPower){

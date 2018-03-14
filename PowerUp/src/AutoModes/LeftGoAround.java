@@ -8,7 +8,7 @@ public class LeftGoAround extends AutoMode {
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		turnToAngle(5, -40, 7, .6);
+		turnToAngle(5, -40, 7, .6, 0);
 		
 	}
 

@@ -36,7 +36,7 @@ public class Constants {
 	//Elevator
 	public static final int INGESTOR_TALON_RIGHT = 6;
 	public static final int INGESTOR_TALONG_LEFT = 9;
-	public static final int INGESTOR_CURRENT_CONSTANT = 4;
+	public static final int INGESTOR_CURRENT_CONSTANT = 1;
 	public static final int INGESTOR_CURRENT_TIMER = 15;
 	
 	//Climber

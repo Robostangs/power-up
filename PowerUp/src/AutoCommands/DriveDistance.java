@@ -2,14 +2,17 @@ package AutoCommands;
 
 import org.usfirst.frc.team548.robot.DriveTrain;
 import org.usfirst.frc.team548.robot.Elevator;
+import org.usfirst.frc.team548.robot.Ingestor;
 
 public class DriveDistance extends AutoCommandBase{
-	private double power, distance, threshold;
+	private double power, distance, threshold, elevatorSetPoint, ingestorPower;
 	
-	public DriveDistance(double timeOut, double power, double distance){
+	public DriveDistance(double timeOut, double power, double distance, double elevatorSetPoint, double ingestorPower){
 		super(timeOut);
 		this.power = power;
 		this.distance = distance;
+		this.elevatorSetPoint = elevatorSetPoint;
+		this.ingestorPower = ingestorPower;
 	}
 	
 	public void init(){
@@ -21,12 +24,14 @@ public class DriveDistance extends AutoCommandBase{
 	protected void run() {
 		// TODO Auto-generated method stub
 		if(Math.abs(DriveTrain.getEncoderAverage()) < Math.abs(distance)){
-			DriveTrain.drive(power, power * .95);
-			Elevator.setPosition(0);
+			DriveTrain.driveStraight(power);
+			Elevator.setPosition(elevatorSetPoint);
+			Ingestor.bothControl(ingestorPower);
 		}
 		else
 			DriveTrain.stop();
-			Elevator.setPosition(0);
+			Elevator.setPosition(elevatorSetPoint);
+			Ingestor.bothControl(ingestorPower);
 		//DriveTrain.resetGyro();
 		
 	}
@@ -37,7 +42,8 @@ public class DriveDistance extends AutoCommandBase{
 		DriveTrain.stop();
 		//DriveTrain.resetGyro();
 		DriveTrain.resetEncoder();
-		Elevator.setPosition(0);
+		Elevator.setPosition(elevatorSetPoint);
+		Ingestor.bothControl(ingestorPower);
 	}
 
 	@Override

@@ -38,11 +38,25 @@ public class TeleOp {
 		//Manip
 		
 		
+		
+		
 		if(manip.getRightBumper())
 			Climber.climb(manip.getRightStickYAxis());
 		else{ 
 			Elevator.setPower(manip.getRightStickYAxis());
 			Climber.climb(0);
+		}
+		
+		if(manip.getLeftStickYAxis() > .5){
+			Ingestor.ingestCurentLimiting();
+				if (Ingestor.isCubeInIngestor()) {
+					manip.setLeftRumble(1);
+					driver.setLeftRumble(1);
+
+				} else {
+					manip.setLeftRumble(0);
+					driver.setLeftRumble(0);
+				}
 		}
 		
 		if(driver.getAButton())
@@ -53,8 +67,8 @@ public class TeleOp {
 			Elevator.resetEncoder();;
 		if(manip.getYButton())
 			Elevator.setElevatorIn();
-		//else
-		//	Elevator.setElevatorOut();
+		else //Jason uncommented lines 56 and 57 on 3/10/18 after kurt left because elevator wasn't unfolding.
+			Elevator.setElevatorOut();
 		//else
 		//	Elevator.setElevatorOut();
 		//Ingestor.ingestCurentLimiting();

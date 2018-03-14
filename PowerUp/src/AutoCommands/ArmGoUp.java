@@ -23,7 +23,7 @@ public class ArmGoUp extends AutoCommandBase {
 	protected void run() {
 		// TODO Auto-generated method stub
 		Elevator.setElevatorOut();
-		Elevator.setPosition(0);
+		////Elevator.setPosition(0);
 	}
 	
 

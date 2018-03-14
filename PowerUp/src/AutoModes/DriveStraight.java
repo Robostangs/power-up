@@ -13,26 +13,40 @@ public class DriveStraight extends AutoMode {
 	protected void run() {
 		// TODO Auto-generated method stub
 		
-		String gameData;
+		String gameData = "";
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		driveDistance(1.2, -.6, (-8960 + (2.5*260)), 10);
-		if(gameData.charAt(0) == 'L'){
-			turnToAngle(1, -30, 5, .5);
-			driveDistance(2, -.7, (-19500 + (260 * 5)), 10);
-			turnToAngle(1, 60, 8, .5);
-			driveDistance(1, -.5, (260 * 20), 10);
-			dropCube(.5, .7, .7);
-			armGoUp(1, true);
-			elevatotSet(2, -45500);
+		
+		if(gameData==null) {
+			for(int i = 0; i < 20; i++) {
+				gameData = DriverStation.getInstance().getGameSpecificMessage();
+				if(gameData!=null) break;
+				try {
+					Thread.sleep(5);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		driveDistance(1.2, -.6, (-8960 + (2.5*260)), 10, 0, 0);
+		if(gameData != null && gameData.charAt(0) == 'L'){
+			turnToAngle(1, -30, 5, .5, 0);
+			driveDistance(2, -.7, (-19500 + (260 * 5)), 10, 0, 0);
+			turnToAngle(1, 60, 8, .5, 0);
+			driveDistance(1, -.5, (260 * 20), 10, 0, 0);
+			dropCube(.5, .7, .7, 0);
+			//armGoUp(1, true);
+			//elevatotSet(2, -45500);
 		}
 		else {
-			turnToAngle(1, 35, 7, .5);
+			turnToAngle(1, 40, 7, .5, 0);
 			//was 10 *
-			driveDistance(.7, -.7, (-26260 + 20 * 260), 10);
-			turnToAngle(1, -35, 7, .5);
-			driveDistance(.7, -.5, (260 * 3), 10);
-			dropCube(.5, .6, .6);
-			armGoUp(2, true);
+			driveDistance(2, -.7, (-19500 + (260 * 5)), 10, 0, 0);
+			turnToAngle(1, -25, 7, .5, 0);
+			driveDistance(1, -.5, (260 * 6), 10, 0, 0);
+			dropCube(.5, .6, .6, 0);
+			//armGoUp(2, true);
 			
 			//armGoUp(1, true);		
 			
