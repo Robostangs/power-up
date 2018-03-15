@@ -32,7 +32,7 @@ public static DriveTrain instance;
 		leftFront = new TalonSRX(Constants.DT_TALON_LEFTFRONT);
 		leftBack = new TalonSRX(Constants.DT_TALON_LEFTBACK); // has encoder
 		sol = new Solenoid(Constants.DT_SOLENOID_SHIFTER);
-		hyro = new AHRS(SerialPort.Port.kMXP);
+		hyro = new AHRS(SerialPort.Port.kUSB);
 		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		leftBack.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		pid = new PIDController(Constants.DT_PID_P, Constants.DT_PID_I, Constants.DT_PID_D, hyro, this);

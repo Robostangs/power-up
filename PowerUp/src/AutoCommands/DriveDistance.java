@@ -18,6 +18,7 @@ public class DriveDistance extends AutoCommandBase{
 	public void init(){
 		DriveTrain.resetEncoder();
 		DriveTrain.resetGyro();
+		Elevator.resetEncoder();
 	}
 
 	@Override

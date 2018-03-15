@@ -67,8 +67,8 @@ public class TeleOp {
 			Elevator.resetEncoder();;
 		if(manip.getYButton())
 			Elevator.setElevatorIn();
-		else //Jason uncommented lines 56 and 57 on 3/10/18 after kurt left because elevator wasn't unfolding.
-			Elevator.setElevatorOut();
+		//else //Jason uncommented lines 56 and 57 on 3/10/18 after kurt left because elevator wasn't unfolding.
+		//	Elevator.setElevatorOut();
 		//else
 		//	Elevator.setElevatorOut();
 		//Ingestor.ingestCurentLimiting();
