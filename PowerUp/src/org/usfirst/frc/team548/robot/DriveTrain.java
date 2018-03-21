@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
@@ -24,14 +25,17 @@ public static DriveTrain instance;
 	private static Solenoid sol;
 	private static AHRS hyro;
 	private static PIDController pid;
+	private static Servo tip, ramp;
 	
 	private DriveTrain(){
+		//ramp = new Servo(1);
+		tip = new Servo(1);
 		rightFront = new TalonSRX(Constants.DT_TALON_RIGHTFRONT); // has encoder
 		rightBack = new TalonSRX(Constants.DT_TALON_RIGHTBACK);
 		leftFront = new TalonSRX(Constants.DT_TALON_LEFTFRONT);
 		leftBack = new TalonSRX(Constants.DT_TALON_LEFTBACK); // has encoder
 		sol = new Solenoid(Constants.DT_SOLENOID_SHIFTER);
-		hyro = new AHRS(SerialPort.Port.kMXP);
+		hyro = new AHRS(SerialPort.Port.kUSB2);
 		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		leftBack.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		pid = new PIDController(Constants.DT_PID_P, Constants.DT_PID_I, Constants.DT_PID_D, hyro, this);
@@ -40,6 +44,7 @@ public static DriveTrain instance;
 		pid.setAbsoluteTolerance(2f);
         pid.setContinuous(true);
 	}
+	//kjgkjgalkdkuukjg
 	
 	public static void drive(double leftPower, double rightPower){
 		rightFront.set(ControlMode.PercentOutput, -rightPower);
@@ -77,6 +82,22 @@ public static DriveTrain instance;
 		leftBack.setSelectedSensorPosition(0, 0, 10);
 		rightFront.setSelectedSensorPosition(0, 0, 10);
 		
+	}
+	
+	public static void rampOut(){
+		ramp.set(1);
+	}
+	
+	public static void rampIn(){
+		ramp.set(.5);
+	}
+	
+	public static void tipIn(){
+		tip.set(.5);
+	}
+	
+	public static void tipOut(){
+		tip.set(0);
 	}
 	
 	public static double getEncoderAverage(){
@@ -144,6 +165,10 @@ public static DriveTrain instance;
 		rightBack.set(ControlMode.PercentOutput, 0);
 		leftBack.set(ControlMode.PercentOutput, 0);
 		leftFront.set(ControlMode.PercentOutput, 0);
+	}
+	
+	public static boolean isConnected(){
+		return hyro.isConnected();
 	}
 	
 	public static void preventTip(){

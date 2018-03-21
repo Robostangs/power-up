@@ -24,7 +24,7 @@ public class Ingestor {
 		right = new TalonSRX(Constants.INGESTOR_TALON_RIGHT);
 		left = new TalonSRX(Constants.INGESTOR_TALONG_LEFT);
 		closeHeavy = new Solenoid(Constants.INGESTOR_SOLENOID_CLOSE_HEAVY);
-		//closeLight = new Solenoid(Constants.INGESTOR_SOLENOID_CLOSE_LIGHT);
+		closeLight = new Solenoid(4);
 		currentTimer = new Timer();
 	}
 	
@@ -67,17 +67,17 @@ public class Ingestor {
 	
 	public static void highPressure(){
 			closeHeavy.set(true);
-			//closeLight.set(false);
+			closeLight.set(false);
 	}
 	
 	public static void lowPressure(){
 		closeHeavy.set(false);
-		//closeLight.set(true);
+		closeLight.set(true);
 	}
 	
 	public static void openAll(){
 		closeHeavy.set(true);
-		//closeLight.set(true);
+		closeLight.set(true);
 	}
 	
 	

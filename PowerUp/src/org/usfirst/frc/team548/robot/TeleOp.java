@@ -19,7 +19,7 @@ public class TeleOp {
 	
 	public static void init(){
 		//DriveTrain.resetEncoder();
-		Elevator.setElevatorOut();
+		Elevator.setElevatorIn();
 		//Elevator.resetEncoder();
 	}
 	
@@ -30,12 +30,13 @@ public class TeleOp {
 		DriveTrain.arcadeDrive(driver.getRightStickYAxis(), Utils.negPowTwo(driver.getLeftStickXAxis()));
 		
 		if(driver.getRightBumper()){
-			DriveTrain.setHighGear(false);
+			DriveTrain.setHighGear(true);
 		}
 		else
-			DriveTrain.setHighGear(true);	
+			DriveTrain.setHighGear(false);	
 		
 		//Manip
+		
 		
 		
 		if(manip.getRightBumper())
@@ -45,41 +46,53 @@ public class TeleOp {
 			Climber.climb(0);
 		}
 	
-		//
+		//asf
 		
 		if(manip.getAButton())
 			Ingestor.highPressure();
-		else
+		else if(manip.getBButton())
 			Ingestor.lowPressure();
-		if(manip.getBButton())
-			Elevator.resetEncoder();
-		if(manip.getXButton()){
-			Elevator.setPosition(20000);
-		}
+		else
+			Ingestor.openAll();
+		
 		//if(driver.getXButton())
 		//	DriveTrain.turnToAngle(-30);
 		
+		if(manip.getXButton())
+			DriveTrain.tipOut();
+		else
+			DriveTrain.tipIn();
+		
+		/*
+		if(manip.getYButton())
+			DriveTrain.rampOut();
+		elsekjg
+			DriveTrain.rampIn();
+		*/
 		if(manip.getYButton())
 			Elevator.setElevatorIn();
-		else
-			Elevator.setElevatorOut();
+		//else
+		//	Elevator.setElevatorOut();
 		//else
 		//	Elevator.setElevatorOut();
 		//Ingestor.ingestCurentLimiting();
 		
 		
-		
-		if(manip.getBackButton()){
+		if(manip.getLeftBumper())
+			Elevator.setBarsOut();
+		else
+			Elevator.setBarsIn();
+		if(manip.getRightTriggerAxis() > 90){
 			Ingestor.leftControl(.5);
 			Ingestor.rightControl(-.5);
 		}
-		else if(manip.getStartButton()){
+		else if(manip.getLeftTriggerAxis() > 90){
 			Ingestor.leftControl(-.5);
 			Ingestor.rightControl(.5);
 		}
 		else 
 			Ingestor.bothControl(-manip.getLeftStickYAxis());
-			
+			//asdf;lkasf
 		
 		
 		//if(Ingestor.isGearInIngestor()){
@@ -100,7 +113,8 @@ public class TeleOp {
 		//SmartDashboard.putBoolean("Limit Switch Error", Elevator.checkLimitSwitches(Elevator.getBottomLimitSwitch()));
 		SmartDashboard.putBoolean("Switch", Elevator.getBottomLimitSwitch());
 		SmartDashboard.putNumber("xbox", manip.getLeftStickYAxis());
-		SmartDashboard.putNumber("Elevator power", Elevator.getAmountPower());		
+		SmartDashboard.putNumber("Elevator power", Elevator.getAmountPower());
+		SmartDashboard.putBoolean("GYRO", DriveTrain.isConnected());
 	}
 	
 }

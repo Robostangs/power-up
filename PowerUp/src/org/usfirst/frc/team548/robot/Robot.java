@@ -12,6 +12,8 @@ import AutoModes.AutoMode;
 import AutoModes.DriveStraight;
 import AutoModes.SwitchAuto1;
 import AutoModes.SwitchAuto2;
+import AutoModes.SwitchPriorityLeft;
+import AutoModes.SwitchPriorityRight;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -39,9 +41,10 @@ public class Robot extends IterativeRobot {
 		autoChooser.addDefault("Scale/Switch Left", new SwitchAuto1());
 		autoChooser.addDefault("Scale/Switch Right", new SwitchAuto2());
 		autoChooser.addDefault("Cross Baseline", new AutoLine());
+		autoChooser.addDefault("Switch Before Scale Right", new SwitchPriorityRight());
+		autoChooser.addDefault("Switch Before Scale Left", new SwitchPriorityLeft());
 		SmartDashboard.putData("Auto mode", autoChooser);
 		//SmartDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());
-		//kms
 		
 	}
 	
