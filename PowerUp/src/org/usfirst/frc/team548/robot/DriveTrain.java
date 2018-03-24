@@ -140,7 +140,7 @@ public static DriveTrain instance;
 	public static void driveStraight(double power){
 		if(power > 0){
 			if(getAngle() > Constants.DT_DRIVE_STRAIGHT)
-				drive(power * .85, power * 1.15);
+				drive(power * .80, power * 1.15);
 			else if(getAngle() < -Constants.DT_DRIVE_STRAIGHT)
 				drive(power * 1.15, power * .85);
 			else
@@ -150,10 +150,11 @@ public static DriveTrain instance;
 			if(getAngle() > Constants.DT_DRIVE_STRAIGHT)
 				drive(power * 1.15, power * .85);
 			else if(getAngle() < -Constants.DT_DRIVE_STRAIGHT)
-				drive(power * .85, power * 1.15);
+				drive(power * .8, power * 1.15);
 			else
 				drive(power, power);
 		}
+		
 	}
 	
 	public static double getPitch(){

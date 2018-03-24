@@ -45,15 +45,22 @@ public class TeleOp {
 			Elevator.setPower(manip.getRightStickYAxis());
 			Climber.climb(0);
 		}
-	
+		
+		/*
+		if(manip.getLeftBumper())
+			Ingestor.openIngest();
+		else{ 
+			Ingestor.closeIngestor();
+		}
+		*/
+		if(manip.getAButton())
+			USBLED.isWombo(true);
+		else
+			USBLED.isWombo(false);
+		
 		//asf
 		
-		if(manip.getAButton())
-			Ingestor.highPressure();
-		else if(manip.getBButton())
-			Ingestor.lowPressure();
-		else
-			Ingestor.openAll();
+		
 		
 		//if(driver.getXButton())
 		//	DriveTrain.turnToAngle(-30);

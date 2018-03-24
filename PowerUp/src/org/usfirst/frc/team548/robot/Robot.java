@@ -34,10 +34,11 @@ public class Robot extends IterativeRobot {
 		Elevator.getInstance();
 		Ingestor.getInstance();
 		Climber.getInstance();
+		USBLED.getInstance();
 		PDP = new PowerDistributionPanel();
 		
 		autoChooser = new SendableChooser<AutoMode>();
-		autoChooser.addDefault("Test Auto", new DriveStraight());
+		autoChooser.addDefault("Pick Auto", new DriveStraight());
 		autoChooser.addDefault("Scale/Switch Left", new SwitchAuto1());
 		autoChooser.addDefault("Scale/Switch Right", new SwitchAuto2());
 		autoChooser.addDefault("Cross Baseline", new AutoLine());

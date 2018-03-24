@@ -3,6 +3,7 @@ package AutoModes;
 import org.usfirst.frc.team548.robot.DriveTrain;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveStraight extends AutoMode {
 	
@@ -29,20 +30,22 @@ public class DriveStraight extends AutoMode {
 			}
 		}
 		
-		//testasdfaskgasdf
 		
-		driveDistance(1.2, -.6, (-8960 + (2.5*260)), 10, 0, 0);
+		
+		driveDistance(.5, -.2, (800), 10, 0, 0);
+		driveDistance(1.2, -.6, (7510), 10, 0, 0);
 		if(gameData != null && gameData.charAt(0) == 'L'){
 			if(DriveTrain.isConnected()){
 			
-				turnToAngle(1, -65, 5, .5, 0);
-				driveDistance(2, -.7, (-19500 + (260 * 5)), 10, 0, 0);
-				turnToAngle(1, 45, 8, .5, 0);
-				driveDistance(1, -.5, (260 * 24), 10, 0, 0);
-				dropCube(.5, .7, .7, 0);
+				turnToAngle(2, -50, 8, .5, 0);
+				SmartDashboard.putNumber("COMP AUTO GYRO", DriveTrain.getAngle());
+				driveDistance(2, -.7, (20057), 10, 0, 0);
+				turnToAngle(2, 40, 8, .5, 0);
+				driveDistance(1, -.5, (260 * 28), 10, 0, 0);
+				//dropCube(1, .7, .7, 0);
 				//armGoUp(.1, true);
-				driveDistance(2, .5, (260 * 5), 10, 0, 0);
-				turnToAngle(1, 90, 13, .5, 0);
+				//driveDistance(2, .5, (260 * 8), 10, 0, 0);
+				//turnToAngle(1, 90, 13, .5, 0);
 			}
 			else{
 				turnToAngle(.4, -90, 13, .5, 0);
@@ -53,15 +56,15 @@ public class DriveStraight extends AutoMode {
 		}
 		else {
 			if(DriveTrain.isConnected()){
-				turnToAngle(1, 40, 7, .5, 0);
-				//was 10 *
-				driveDistance(2, -.7, (-19500 + (260 * 14)), 10, 0, 0);
-				turnToAngle(1, -45, 7, .5, 0);
-				driveDistance(1, -.5, (260 * 19), 10, 0, 0);
-				dropCube(.5, .3, .3, 0);
+				turnToAngle(1, 60, 10, .5, 0);
+				
+				driveDistance(2, -.7, (20057 - (260 * 10)), 10, 0, 0);
+				turnToAngle(1., -35, 5, .5, 0);
+				driveDistance(1, -.5, (260 * 28), 10, 0, 0);
+				//dropCube(.5, .7, .7, 0);
 				//armGoUp(.1, true);
 				driveDistance(2, .5, (260 * 12), 10, 0, 0);
-				turnToAngle(1, -90, 13, .5, 0);
+				//turnToAngle(1, -90, 13, .5, 0);
 			}
 			else{
 				turnToAngle(.4, -90, 13, .5, 0);

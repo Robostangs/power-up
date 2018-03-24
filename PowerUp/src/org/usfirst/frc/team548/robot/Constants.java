@@ -14,7 +14,7 @@ public class Constants {
 	public static final double DT_PID_P = 0.025d;
 	public static final double DT_PID_I = 0;
 	public static final double DT_PID_D = 0.06d;
-	public static final double DT_DRIVE_STRAIGHT = .9;
+	public static final double DT_DRIVE_STRAIGHT = 1;
 	
 	//Elevator
 	public static final int ELEVATOR_TOP_LIMITSWITCH = 1;
