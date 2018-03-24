@@ -15,7 +15,7 @@ public class DriveStraight extends AutoMode {
 		
 		String gameData = "";
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
+		//
 		if(gameData==null) {
 			for(int i = 0; i < 20; i++) {
 				gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -29,23 +29,45 @@ public class DriveStraight extends AutoMode {
 			}
 		}
 		
-		driveDistance(1.2, -.6, (-8960 + (2.5*260)), 10, 0, 0);
+		
+		
+		driveDistance(.5, -.2, (800), 10, 0, 0);
+		driveDistance(1.2, -.6, (7510), 10, 0, 0);
 		if(gameData != null && gameData.charAt(0) == 'L'){
-			turnToAngle(1, -30, 5, .5, 0);
-			driveDistance(2, -.7, (-19500 + (260 * 5)), 10, 0, 0);
-			turnToAngle(1, 60, 8, .5, 0);
-			driveDistance(1, -.5, (260 * 20), 10, 0, 0);
-			dropCube(.5, .7, .7, 0);
-			//armGoUp(1, true);
-			//elevatotSet(2, -45500);
+			if(DriveTrain.isConnected()){
+			
+				turnToAngle(1, -45, 30, .5, 0);
+				driveDistance(2, -.7, (20057), 10, 0, 0);
+				turnToAngle(2, 70, 45, .5, 0);
+				driveDistance(1, -.5, (260 * 28), 10, 0, 0);
+				dropCube(1, .7, .7, 0);
+				armGoUp(.1, true);
+				driveDistance(2, .5, (260 * 8), 10, 0, 0);
+				turnToAngle(1, 90, 13, .5, 0);
+			}
+			else{
+				turnToAngle(.4, -90, 13, .5, 0);
+				driveDistance(1, -.5, (260 * 20), 10, 0, 0);
+			}
+			
+			//uirkj
 		}
 		else {
-			turnToAngle(1, 50, 8, .5, 0);
-			//was 10 *
-			driveDistance(2, -.7, (-19500 + (260 * 5)), 10, 0, 0);
-			turnToAngle(1, -25, 7, .5, 0);
-			driveDistance(1, -.5, (260 * 8), 10, 0, 0);
-			dropCube(.5, .6, .6, 0);
+			if(DriveTrain.isConnected()){
+				turnToAngle(1, 60, 30, .5, 0);
+				
+				driveDistance(2, -.7, (20057 - (260 * 10)), 10, 0, 0);
+				turnToAngle(1., -35, 25, .5, 0);
+				driveDistance(1, -.5, (260 * 28), 10, 0, 0);
+				dropCube(.5, .7, .7, 0);
+				//armGoUp(.1, true);
+				driveDistance(2, .5, (260 * 12), 10, 0, 0);
+				//turnToAngle(1, -90, 13, .5, 0);
+			}
+			else{
+				turnToAngle(.4, -90, 13, .5, 0);
+				driveDistance(1, -.5, (260 * 20), 10, 0, 0);
+			}
 			//armGoUp(2, true);
 			
 			//armGoUp(1, true);		

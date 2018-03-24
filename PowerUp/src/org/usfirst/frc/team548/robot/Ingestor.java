@@ -3,6 +3,7 @@ package org.usfirst.frc.team548.robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 
 public class Ingestor {
@@ -11,6 +12,7 @@ public class Ingestor {
 	private static TalonSRX right, left;
 	private static boolean currentLimiting = false, startedTimer = false;
 	private static Timer currentTimer;
+	private static DoubleSolenoid ingestHer;
 	
 	public static Ingestor getInstance(){
 		if(instance == null)
@@ -21,6 +23,7 @@ public class Ingestor {
 	private Ingestor(){
 		right = new TalonSRX(Constants.INGESTOR_TALON_RIGHT);
 		left = new TalonSRX(Constants.INGESTOR_TALONG_LEFT);
+		ingestHer = new DoubleSolenoid(1, 0);
 		currentTimer = new Timer();
 	}
 	
@@ -69,6 +72,14 @@ public class Ingestor {
 		left.set(ControlMode.PercentOutput, power);
 	}
 	
+	public static void openIngest(){
+		ingestHer.set(DoubleSolenoid.Value.kForward);
+	}
+	
+	public static void closeIngestor(){
+		ingestHer.set(DoubleSolenoid.Value.kReverse);
+	}
+	
 	public static void rightControl(double power){
 		right.set(ControlMode.PercentOutput, -power);
 	}
@@ -76,4 +87,6 @@ public class Ingestor {
 	public static boolean isCubeInIngestor() {
 		return currentLimiting;
 	}
+	
+	
 }

@@ -32,7 +32,7 @@ public static DriveTrain instance;
 		leftFront = new TalonSRX(Constants.DT_TALON_LEFTFRONT);
 		leftBack = new TalonSRX(Constants.DT_TALON_LEFTBACK); // has encoder
 		sol = new Solenoid(Constants.DT_SOLENOID_SHIFTER);
-		hyro = new AHRS(SerialPort.Port.kUSB);
+		hyro = new AHRS(SerialPort.Port.kUSB1);
 		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		leftBack.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		pid = new PIDController(Constants.DT_PID_P, Constants.DT_PID_I, Constants.DT_PID_D, hyro, this);
@@ -86,11 +86,11 @@ public static DriveTrain instance;
 	}
 	
 	public static double getEncoderAverage(){
-		if(getLeftEncoderDistance() > getRightEncoderDistance()){
-			return getLeftEncoderDistance();
-		}
-		else
+		//if(getLeftEncoderDistance() > getRightEncoderDistance()){
 			return getRightEncoderDistance();
+		//}
+		//else
+			//return getRightEncoderDistance();
 	}
 	
 	public static void turnToAngle(double angle){
@@ -147,7 +147,9 @@ public static DriveTrain instance;
 	}
 	
 	
-	
+	public static boolean isConnected(){
+		return hyro.isConnected();
+	}
 	
 	
 	public static double getRightPower(){

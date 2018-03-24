@@ -23,26 +23,34 @@ public class SwitchAuto2 extends AutoMode {
 			}
 		}
 		
-		if(gameData != null && gameData.charAt(1) == 'R'){
 		
-		//armGoUp(.001, true);
+		if(gameData != null && gameData.charAt(1) == 'R'){
+		armGoUp(.001, true);
 		driveDistance(1, .3, (260 * 8), 10, 0, .3);
 		driveDistance(8, .7, (72280), 10, 0, .3);
+		//
 		turnToAngle(1, -90, 8, .5, 20000);
-		//driveDistance(2, -.5, 2080 + 3 * 260, 10, 20000, .3);
-		dropCube(2, 1, 1, 20000);
+		///driveDistance(2, -.5, 2080 + 3 * 260, 10, 20000, .3);
+		dropCube(2, 1, 1, 15000);
 		driveDistance(1, .5, 2080 + 9 * 260, 20, 20000, 0);
+		
 		}
-		else if(gameData != null && gameData.charAt(0) == 'R'){
+		
+		
+		if(gameData != null && gameData.charAt(0) == 'R'){
 			driveDistance(.7, .3, (260 * 8), 10, 0, 0);
 			driveDistance(4, .6, (260*142), 10, 0, 0);
 			turnToAngle(2, 90, 8, .5, 0);
-			driveDistance(1, -.6, (260 * 30), 10, 0, 0);
-			dropCube(1, .9, .9, 0);
 			driveDistance(1, .6, (260 * 30), 10, 0, 0);
-			//turnToAngle(1, -90, 8, .5, 0);
-			//driveDistance(1, -.6, (260 * 30), 10, 0, 0);
-			//turnToAngle(1,  90, 8, .5, 0);
+			dropCube(1, .9, .9, 0);
+			driveDistance(1, -.6, (260 * 30), 10, 0, 0);
+			armGoUp(1, true);
+		}
+		else{
+			driveDistance(1, .3, (260 * 8), 10, 0, .3);
+			driveDistance(8, .7, (72280 - (260 * 30)), 10, 0, .3);
+			//turnToAngle(2, 90, 8, .5, 0);
+			//armGoUp(1, true);
 		}
 		
 		

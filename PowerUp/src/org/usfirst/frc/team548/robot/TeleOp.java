@@ -66,7 +66,11 @@ public class TeleOp {
 		if(driver.getXButton())
 			Elevator.resetEncoder();;
 		if(manip.getYButton())
-			Elevator.setElevatorIn();
+			Elevator.setElevatorOut();
+		if(manip.getLeftBumper())
+			Ingestor.openIngest();
+		else
+			Ingestor.closeIngestor();
 		//else //Jason uncommented lines 56 and 57 on 3/10/18 after kurt left because elevator wasn't unfolding.
 		//	Elevator.setElevatorOut();
 		//else
@@ -88,10 +92,15 @@ public class TeleOp {
 			
 		
 		
-		//if(Ingestor.isGearInIngestor()){
-		//	manip.setLeftRumble(1);
-		//	driver.setLeftRumble(1);
-		//}
+		if(Ingestor.isCubeInIngestor()){
+			manip.setLeftRumble(1);
+			driver.setLeftRumble(1);
+		}
+		else{
+			manip.setLeftRumble(0);
+			driver.setLeftRumble(0);
+		}
+		//asdfj}
 		
 		
 		
@@ -106,7 +115,8 @@ public class TeleOp {
 		//SmartDashboard.putBoolean("Limit Switch Error", Elevator.checkLimitSwitches(Elevator.getBottomLimitSwitch()));
 		SmartDashboard.putBoolean("Switch", Elevator.getBottomLimitSwitch());
 		SmartDashboard.putNumber("xbox", manip.getLeftStickYAxis());
-		SmartDashboard.putNumber("Elevator power", Elevator.getAmountPower());		
+		SmartDashboard.putNumber("Elevator power", Elevator.getAmountPower());	
+		SmartDashboard.putBoolean("Gyro", DriveTrain.isConnected());
 	}
 	
 }

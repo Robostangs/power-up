@@ -33,14 +33,15 @@ public class Constants {
 	public static final int ELEVATOR_SOLENOID1 = 7;
 	public static final int ELEVATOR_SOLENOID2 = 6;
 	
-	//Elevator
-	public static final int INGESTOR_TALON_RIGHT = 6;
+	//Ingestor
+	public static final int INGESTOR_TALON_RIGHT = 5;
 	public static final int INGESTOR_TALONG_LEFT = 9;
-	public static final int INGESTOR_CURRENT_CONSTANT = 1;
+	public static final int INGESTOR_CURRENT_CONSTANT = 4;
 	public static final int INGESTOR_CURRENT_TIMER = 15;
+	//1 is closed, 0 is open
 	
 	//Climber
-	public static final int CLIMBER_TALON_UN = 4;
+	public static final int CLIMBER_TALON_UN = 3;
 	public static final int CLIMBER_TALON_DEUX = 11;
 	public static final int CLIMBER_TALON_TROIS = 12;
 	
