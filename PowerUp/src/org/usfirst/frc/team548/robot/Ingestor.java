@@ -62,8 +62,8 @@ public class Ingestor {
 			stop();
 		}
 		else{
-		right.set(ControlMode.PercentOutput, -power);
-		left.set(ControlMode.PercentOutput, power);
+		right.set(ControlMode.PercentOutput, power);
+		left.set(ControlMode.PercentOutput, -power);
 		}
 	}
 	
@@ -86,11 +86,11 @@ public class Ingestor {
 	}
 	
 	public static void leftControl(double power){
-		left.set(ControlMode.PercentOutput, power);
+		left.set(ControlMode.PercentOutput, -power);
 	}
 	
 	public static void rightControl(double power){
-		right.set(ControlMode.PercentOutput, -power);
+		right.set(ControlMode.PercentOutput, power);
 	}
 	
 	public static boolean isGearInIngestor() {

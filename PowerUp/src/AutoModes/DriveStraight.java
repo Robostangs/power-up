@@ -37,15 +37,15 @@ public class DriveStraight extends AutoMode {
 		if(gameData != null && gameData.charAt(0) == 'L'){
 			if(DriveTrain.isConnected()){
 			
-				turnToAngle(2, -50, 8, .5, 0);
-				SmartDashboard.putNumber("COMP AUTO GYRO", DriveTrain.getAngle());
-				driveDistance(2, -.7, (20057), 10, 0, 0);
-				turnToAngle(2, 40, 8, .5, 0);
+				turnToAngle(1, -45, 30, .5, 0);
+				//taking away 2938
+				driveDistance(2, -.7, (20057 - 2938), 10, 0, 0);
+				turnToAngle(2, 45, 30, .5, 0);
 				driveDistance(1, -.5, (260 * 28), 10, 0, 0);
-				//dropCube(1, .7, .7, 0);
+				dropCube(1, .7, .7, 0);
 				//armGoUp(.1, true);
-				//driveDistance(2, .5, (260 * 8), 10, 0, 0);
-				//turnToAngle(1, 90, 13, .5, 0);
+				driveDistance(2, .5, (260 * 8), 10, 0, 0);
+				turnToAngle(1, 90, 13, .5, 0);
 			}
 			else{
 				turnToAngle(.4, -90, 13, .5, 0);
@@ -56,12 +56,11 @@ public class DriveStraight extends AutoMode {
 		}
 		else {
 			if(DriveTrain.isConnected()){
-				turnToAngle(1, 60, 10, .5, 0);
-				
+				turnToAngle(1, 60, 30, .5, 0);
 				driveDistance(2, -.7, (20057 - (260 * 10)), 10, 0, 0);
-				turnToAngle(1., -35, 5, .5, 0);
+				turnToAngle(1., -35, 25, .5, 0);
 				driveDistance(1, -.5, (260 * 28), 10, 0, 0);
-				//dropCube(.5, .7, .7, 0);
+				dropCube(.5, .7, .7, 0);
 				//armGoUp(.1, true);
 				driveDistance(2, .5, (260 * 12), 10, 0, 0);
 				//turnToAngle(1, -90, 13, .5, 0);
