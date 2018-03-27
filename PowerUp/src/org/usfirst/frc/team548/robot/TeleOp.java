@@ -47,6 +47,7 @@ public class TeleOp {
 			Climber.climb(0);
 		}
 		
+		/*
 		if(manip.getLeftStickYAxis() > .5){
 			Ingestor.ingestCurentLimiting();
 				if (Ingestor.isCubeInIngestor()) {
@@ -58,7 +59,7 @@ public class TeleOp {
 					driver.setLeftRumble(0);
 				}
 		}
-		
+		*/
 		if(driver.getAButton())
 			DriveTrain.resetEncoder();
 		if(driver.getBButton())
@@ -67,10 +68,12 @@ public class TeleOp {
 			Elevator.resetEncoder();;
 		if(manip.getYButton())
 			Elevator.setElevatorOut();
+		/*
 		if(manip.getLeftBumper())
 			Ingestor.openIngest();
 		else
 			Ingestor.closeIngestor();
+		*/
 		//else //Jason uncommented lines 56 and 57 on 3/10/18 after kurt left because elevator wasn't unfolding.
 		//	Elevator.setElevatorOut();
 		//else
@@ -87,11 +90,15 @@ public class TeleOp {
 			Ingestor.leftControl(-.5);
 			Ingestor.rightControl(.5);
 		}
+		else if(manip.getLeftJoystickButton()){
+			Ingestor.leftControl(-.3);
+			Ingestor.rightControl(-.3);
+		}
 		else 
 			Ingestor.bothControl(-manip.getLeftStickYAxis());
 			
 		
-		
+		//Ingestor.ingestCurentLimiting();
 		if(Ingestor.isCubeInIngestor()){
 			manip.setLeftRumble(1);
 			driver.setLeftRumble(1);

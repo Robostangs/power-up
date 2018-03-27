@@ -44,7 +44,7 @@ public class SwitchAuto2 extends AutoMode {
 			driveDistance(1, .6, (260 * 30), 10, 0, 0);
 			dropCube(1, .9, .9, 0);
 			driveDistance(1, -.6, (260 * 30), 10, 0, 0);
-			armGoUp(1, true);
+			//armGoUp(1, true);
 		}
 		else{
 			driveDistance(1, .3, (260 * 8), 10, 0, .3);

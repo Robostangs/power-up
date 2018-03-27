@@ -46,11 +46,11 @@ public class SwitchAuto extends AutoMode {
 		 if(gameData != null && gameData.charAt(0) == 'L'){
 			driveDistance(.7, .3, (260 * 8), 10, 0, 0);
 			driveDistance(4, .6, (260*142), 10, 0, 0);
-			turnToAngle(2, -90, 8, .5, 0);
+			turnToAngle(2, -90, 45, .5, 0);
 			driveDistance(1, -.6, (260 * 30), 10, 0, 0);
 			dropCube(1, .9, .9, 0);
 			driveDistance(1, .6, (260 * 25), 10, 0, 0);
-			armGoUp(.1, true);
+			//armGoUp(.1, true);
 		}
 		else{
 			driveDistance(1, .3, (260 * 8), 10, 0, .3);

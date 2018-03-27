@@ -21,7 +21,7 @@ public class Climber {
 	}
 	
 	public static void climb(double power){
-		talonUn.set(ControlMode.PercentOutput, -power);
+		talonUn.set(ControlMode.PercentOutput, power);
 		talonDeux.set(ControlMode.PercentOutput, power);
 		talonTrois.set(ControlMode.PercentOutput, power);
 	}

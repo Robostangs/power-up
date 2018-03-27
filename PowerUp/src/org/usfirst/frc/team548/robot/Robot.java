@@ -7,12 +7,19 @@
 
 package org.usfirst.frc.team548.robot;
 
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
 import AutoModes.AutoMode;
 import AutoModes.DriveStraight;
 import AutoModes.LeftGoAround;
 import AutoModes.SwitchAuto;
 import AutoModes.SwitchAuto2;
 import AutoModes.TestStuff;
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -42,11 +49,17 @@ public class Robot extends IterativeRobot {
 		autoChooser.addDefault("Scale/Switch Right", new SwitchAuto2());
 		autoChooser.addDefault("Test Stuff", new TestStuff());
 		
+		UsbCamera camera =  CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(480, 320);
+		SmartDashboard.putNumber("Brightness", camera.getBrightness());
+		//camera.setVideoMode(null, 640, 480, 30);
 		SmartDashboard.putData("Auto mode", autoChooser);
 		//SmartDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());
-		
-		
+        
 	}
+
+		
+	
 	
 	@Override
 	public void autonomousInit() {
