@@ -48,10 +48,13 @@ public class Robot extends IterativeRobot {
 		autoChooser.addDefault("Scale/Switch Left", new SwitchAuto());
 		autoChooser.addDefault("Scale/Switch Right", new SwitchAuto2());
 		autoChooser.addDefault("Test Stuff", new TestStuff());
-		
+		try{
 		UsbCamera camera =  CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(480, 320);
 		SmartDashboard.putNumber("Brightness", camera.getBrightness());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		//camera.setVideoMode(null, 640, 480, 30);
 		SmartDashboard.putData("Auto mode", autoChooser);
 		//SmartDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());

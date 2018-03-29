@@ -86,11 +86,11 @@ public static DriveTrain instance;
 	}
 	
 	public static double getEncoderAverage(){
-		//if(getLeftEncoderDistance() > getRightEncoderDistance()){
+		if(getLeftEncoderDistance() > getRightEncoderDistance()){
 			return getRightEncoderDistance();
-		//}
-		//else
-			//return getRightEncoderDistance();
+		}
+		else
+			return getRightEncoderDistance();
 	}
 	
 	public static void turnToAngle(double angle){

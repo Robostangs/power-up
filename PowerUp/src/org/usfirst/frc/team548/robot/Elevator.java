@@ -36,7 +36,7 @@ public class Elevator {
 		topLimitSwitch = new DigitalInput(Constants.ELEVATOR_TOP_LIMITSWITCH);
 		right.set(ControlMode.Follower, left.getDeviceID());
 		left.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-		whip1 = new DoubleSolenoid(5, 6);
+		whip1 = new DoubleSolenoid(2, 3);
 		left.config_kP(0, Constants.ELEAVTOR_PID_P, 0);
 		left.config_kI(0, Constants.ELEAVTOR_PID_I, 0);
 		left.config_kD(0, Constants.ELEAVTOR_PID_D, 0);

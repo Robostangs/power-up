@@ -19,7 +19,7 @@ public class TeleOp {
 	
 	public static void init(){
 		//DriveTrain.resetEncoder();
-		Elevator.setElevatorIn();
+		Elevator.setElevatorOut();
 		//Elevator.resetEncoder();
 	}
 	
