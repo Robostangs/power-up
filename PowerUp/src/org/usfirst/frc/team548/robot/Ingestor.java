@@ -14,7 +14,7 @@ public class Ingestor {
 	private static boolean currentLimiting = false, startedTimer = false;
 	private static Timer currentTimer;
 	//private static Solenoid closeHeavy, closeLight;
-	//private static DoubleSolenoid ingestHer;
+	private static DoubleSolenoid ingestSol;
 	
 	public static Ingestor getInstance(){
 		if(instance == null)
@@ -27,7 +27,7 @@ public class Ingestor {
 		left = new TalonSRX(Constants.INGESTOR_TALONG_LEFT);
 	//	closeHeavy = new Solenoid(Constants.INGESTOR_SOLENOID_CLOSE_HEAVY);
 	//	closeLight = new Solenoid(4);
-	//	ingestHer = new DoubleSolenoid(0,1);
+		ingestSol = new DoubleSolenoid(4,0);
 		currentTimer = new Timer();
 	}
 	
@@ -67,17 +67,17 @@ public class Ingestor {
 		}
 	}
 	
-		
-	/*
+	
+	
 	public static void openIngest(){
-		ingestHer.set(DoubleSolenoid.Value.kForward);
+		ingestSol.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public static void closeIngestor(){
-		ingestHer.set(DoubleSolenoid.Value.kReverse);
+		ingestSol.set(DoubleSolenoid.Value.kReverse);
 	}
 	
-	*/
+	
 	
 	
 	public static void stop(){

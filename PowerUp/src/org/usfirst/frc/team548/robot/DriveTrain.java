@@ -44,7 +44,6 @@ public static DriveTrain instance;
 		pid.setAbsoluteTolerance(2f);
         pid.setContinuous(true);
 	}
-	//kjgkjgalkdkuukjg
 	
 	public static void drive(double leftPower, double rightPower){
 		rightFront.set(ControlMode.PercentOutput, -rightPower);

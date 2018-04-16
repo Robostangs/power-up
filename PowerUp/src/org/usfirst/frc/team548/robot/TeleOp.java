@@ -19,7 +19,7 @@ public class TeleOp {
 	
 	public static void init(){
 		//DriveTrain.resetEncoder();
-		Elevator.setElevatorIn();
+		Elevator.setElevatorOut();
 		//Elevator.resetEncoder();
 	}
 	
@@ -35,78 +35,55 @@ public class TeleOp {
 		else
 			DriveTrain.setHighGear(false);	
 		
-		//Manip
-		
-		
-		
+		//Manip		
 		if(manip.getRightBumper())
 			Climber.climb(manip.getRightStickYAxis());
-		else{ 
+		else { 
 			Elevator.setPower(manip.getRightStickYAxis());
 			Climber.climb(0);
 		}
+		//gkj
 		
-		/*
+		
+		
 		if(manip.getLeftBumper())
-			Ingestor.openIngest();
-		else{ 
 			Ingestor.closeIngestor();
+		else{ 
+			Ingestor.openIngest();
 		}
-		*/
-		if(manip.getAButton())
-			USBLED.isWombo(true);
-		else
-			USBLED.isWombo(false);
+		 
+	
 		
-		//asf
-		
-		
-		
-		//if(driver.getXButton())
-		//	DriveTrain.turnToAngle(-30);
-		
-		if(manip.getXButton())
-			DriveTrain.tipOut();
-		else
-			DriveTrain.tipIn();
-		
-		/*
-		if(manip.getYButton())
-			DriveTrain.rampOut();
-		elsekjg
-			DriveTrain.rampIn();
-		*/
+
 		if(manip.getYButton())
 			Elevator.setElevatorIn();
-		//else
-		//	Elevator.setElevatorOut();
-		//else
-		//	Elevator.setElevatorOut();
-		//Ingestor.ingestCurentLimiting();
-		
-		
-		if(manip.getLeftBumper())
-			Elevator.setBarsOut();
 		else
-			Elevator.setBarsIn();
-		if(manip.getRightTriggerAxis() > 90){
+			Elevator.setElevatorOut();
+		
+		
+		
+		
+		if(manip.getBackButton()){
 			Ingestor.leftControl(.5);
 			Ingestor.rightControl(-.5);
 		}
-		else if(manip.getLeftTriggerAxis() > 90){
+		else if(manip.getStartButton()){
 			Ingestor.leftControl(-.5);
 			Ingestor.rightControl(.5);
 		}
+		else if(manip.getLeftJoystickButton()){
+			Ingestor.leftControl(-.3);
+			Ingestor.rightControl(-.3);
+		}
 		else 
 			Ingestor.bothControl(-manip.getLeftStickYAxis());
-			//asdf;lkasf
 		
 		
-		//if(Ingestor.isGearInIngestor()){
-		//	manip.setLeftRumble(1);
-		//	driver.setLeftRumble(1);
-		//}
 		
+		if(manip.getBButton())
+			Elevator.setBarsOut();
+		else
+			Elevator.setBarsIn();
 		
 			
 		
