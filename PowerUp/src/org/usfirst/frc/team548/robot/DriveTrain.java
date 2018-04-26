@@ -85,7 +85,6 @@ public static DriveTrain instance;
 		
 	}
 	
-	//lkjasfdasflkj
 	
 	public static double getEncoderAverage(){
 		if(getLeftEncoderDistance() > getRightEncoderDistance()){

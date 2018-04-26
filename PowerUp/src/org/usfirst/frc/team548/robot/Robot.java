@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		//camera.setVideoMode(null, 640, 480, 30);
+		
 		SmartDashboard.putData("Auto mode", autoChooser);
 		//SmartDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());
         
@@ -67,10 +67,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		DriveTrain.resetGyro();
+		DriveTrain.resetEncoder();
+		DriveTrain.resetGyro();
 		autoChooser.getSelected().start();
-		
-		
-		
 	}
 
 	@Override

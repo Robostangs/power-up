@@ -17,8 +17,8 @@ public class DriveDistance extends AutoCommandBase{
 	
 	public void init(){
 		DriveTrain.resetEncoder();
-		DriveTrain.resetGyro();
-		Elevator.resetEncoder();
+		//DriveTrain.resetGyro();
+		//Elevator.resetEncoder();
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class DriveDistance extends AutoCommandBase{
 		// TODO Auto-generated method stub
 		DriveTrain.stop();
 		//DriveTrain.resetGyro();
-		DriveTrain.resetEncoder();
+		//DriveTrain.resetEncoder();
 		Elevator.setPosition(elevatorSetPoint);
 		Ingestor.bothControl(ingestorPower);
 	}

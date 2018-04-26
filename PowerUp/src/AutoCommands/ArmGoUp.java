@@ -16,6 +16,7 @@ public class ArmGoUp extends AutoCommandBase {
 		// TODO Auto-generated method stub
 		
 		Elevator.resetEncoder();
+		
 
 	}
 

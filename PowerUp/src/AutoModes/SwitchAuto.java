@@ -32,16 +32,17 @@ public class SwitchAuto extends AutoMode {
 		if(gameData != null && gameData.charAt(1) == 'L'){
 			
 			armGoUp(.001, true);
-			driveDistance(1, .3, (260 * 8), 10, 0, .3);
-			driveDistance(7, .7, (72280 - (29 * 260)), 10, 0, .3);
-			
-			turnToAngle(1, 30, 25, .5, 10000);
-			driveDistance(2, .4, 15 * 260, 10, 10000, .3);
-			dropCube(.5, .9, .9, 10000);
-			driveDistance(1, -.5, 2080 + 12 * 260, 20, 0, 0);
+			driveDistance(1, .3, (260 * 8), 10, 61000, .3);
+			driveDistance(6, .7, (72280 - (15 * 260)), 10, 61000, .3);
+			turnToAngle(1.2, 30, 15, .5, 61000);
+			driveDistance(.5, .4, 8 * 260, 10, 61000, .3);
+			dropCube(.5, 1, 1, 61000);
+			driveDistance(2, -.5, 2080 + (12 * 260), 20, 61000, 0);
 			//OLD driveDistance(1, -.5, 2080 + 9 * 260, 20, 10000, 0);
-			turnToAngle(1, 110, 25, .5, 0);
-			driveDistance(1, .5, 2080 + 20 * 260, 20, 0, 0);
+			//turnToAngle(1, 110, 25, .5, 0);
+			//driveDistance(1, .5, 2080 + 20 * 260, 20, 0, 0);
+			
+			
 			}
 			
 		

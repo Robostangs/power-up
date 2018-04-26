@@ -41,6 +41,10 @@ public class Elevator {
 		left.config_kI(0, Constants.ELEAVTOR_PID_I, 0);
 		left.config_kD(0, Constants.ELEAVTOR_PID_D, 0);
 		left.config_kF(0, Constants.ELEAVTOR_PID_F, 0);
+		left.configPeakOutputForward(.5, 10);
+		left.configPeakOutputReverse(-.5, 10);
+		
+		
 		//left.setInverted(false);
 		//right.setInverted(true);
 		left.setSensorPhase(true);

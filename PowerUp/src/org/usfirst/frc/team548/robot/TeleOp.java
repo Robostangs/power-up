@@ -67,13 +67,15 @@ public class TeleOp {
 		if(driver.getXButton())
 			Elevator.resetEncoder();;
 		if(manip.getYButton())
-			Elevator.setElevatorOut();
-		/*
-		if(manip.getLeftBumper())
-			Ingestor.openIngest();
+			Elevator.setElevatorIn();
 		else
+				Elevator.setElevatorOut();
+		
+		if(manip.getLeftBumper())
 			Ingestor.closeIngestor();
-		*/
+		else
+			Ingestor.openIngest();
+		
 		//else //Jason uncommented lines 56 and 57 on 3/10/18 after kurt left because elevator wasn't unfolding.
 		//	Elevator.setElevatorOut();
 		//else
@@ -109,6 +111,14 @@ public class TeleOp {
 		}
 		//asdfj}
 		
+		if(driver.getBButton()){
+			Elevator.resetEncoder();
+		}
+		
+		if(driver.getAButton()){
+			
+			Elevator.setPosition(55000);
+		}
 		
 		
 		//Ingestor.rightControl(manip.getRightTriggerAxis());

@@ -25,17 +25,19 @@ public class SwitchAuto2 extends AutoMode {
 		
 		
 		if(gameData != null && gameData.charAt(1) == 'R'){
-			armGoUp(.001, true);
-			driveDistance(1, .3, (260 * 8), 10, 0, .3);
-			driveDistance(7, .7, (72280 - (29 * 260)), 10, 0, .3);
+			//
+			//test 1 - Increase turn, was -15, now -45
+			//test 2 change to -60
+			//change to -50
 			
-			turnToAngle(1, -30, 25, .5, 10000);
-			driveDistance(2, .4, 15 * 260, 10, 10000, .3);
-			dropCube(.5, .9, .9, 10000);
-			driveDistance(1, -.5, 2080 + 12 * 260, 20, 0, 0);
-			//OLD driveDistance(1, -.5, 2080 + 9 * 260, 20, 10000, 0);
-			turnToAngle(1, -110, 25, .5, 0);
-			driveDistance(1, .5, 2080 + 20 * 260, 20, 0, 0);
+			
+			armGoUp(.001, true);
+			driveDistance(1, .3, (260 * 8), 10, 61000, .3);
+			driveDistance(5.5, .7, (72280 - (15 * 260)), 10, 61000, .3);
+			turnToAngle(1, -50, 35, .5, 61000);
+			driveDistance(1, .5, (260 * 8), 10, 61000, .3);
+			dropCube(.5, 1, 1, 61000);
+			driveDistance(1, -.5, 2080 + 12 * 260, 20, 61000, 0);
 			
 		/*
 		//armGoUp(.001, true);
@@ -52,6 +54,7 @@ public class SwitchAuto2 extends AutoMode {
 		
 		
 		else if(gameData != null && gameData.charAt(0) == 'R'){
+			
 			driveDistance(.7, .3, (260 * 8), 10, 0, 0);
 			driveDistance(4, .6, (260*144), 10, 0, 0);
 			turnToAngle(2, 90, 45, .5, 0);
@@ -59,6 +62,9 @@ public class SwitchAuto2 extends AutoMode {
 			dropCube(1, .9, .9, 0);
 			driveDistance(1, .6, (260 * 25), 10, 0, 0);
 			armGoUp(.1, true);
+			
+			
+			
 			
 			/*
 			driveDistance(.7, .3, (260 * 8), 10, 0, 0);
