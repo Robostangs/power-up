@@ -30,6 +30,7 @@ public class SwitchAuto1 extends AutoMode {
 		
 		/*
 		if(gameData != null && gameData.charAt(1) == 'L'){
+			/*
 			armGoUp(.001, true);
 			driveDistance(1, .3, (260 * 8), 10, 0, .3);
 			driveDistance(7, .7, (72280 - (29 * 260)), 10, 0, .3);
@@ -40,24 +41,32 @@ public class SwitchAuto1 extends AutoMode {
 			//OLD driveDistance(1, -.5, 2080 + 9 * 260, 20, 10000, 0);
 			turnToAngle(1, 110, 25, .5, 0);
 			driveDistance(1, .5, 2080 + 20 * 260, 20, 0, 0);
-			}
 			
-		*/
+			armGoUp(.001, true);
+			driveDistance(1, .3, (260 * 8), 10, 0, .3);
+			driveDistance(6, .7, (72280 - (15 * 260)), 10, 15000, .3);
+			turnToAngle(1.2, 30, 15, .5, 15000);
+			driveDistance(.5, .4, 8 * 260, 10, 15000, .3);
+			dropCube(.5, 1, 1, 15000);
+			driveDistance(2, -.5, 2080 + (10 * 260), 20, 15000, 0);
+			
+			}
+			*/
+		
 		 if(gameData != null && gameData.charAt(0) == 'L'){
 			 driveDistance(.7, .3, (260 * 8), 10, 0, 0);
 			driveDistance(4, .6, (260*144), 10, 0, 0);
 			turnToAngle(2, -90, 45, .5, 0);
 			driveDistance(1, -.6, (260 * 30), 10, 0, 0);
 			dropCube(1, .9, .9, 0);
-			driveDistance(1, .6, (260 * 15), 10, 0, 0);
-			turnToAngle(2, 90, 45, .5, 0);
-			armGoUp(.1, true);
+			driveDistance(1, .6, (260 * 10), 10, 0, 0);
+			//turnToAngle(2, 90, 45, .5, 0);
+			//armGoUp(.1, true);
 		}
 		else{
-			driveDistance(1, .3, (260 * 8), 10, 0, .3);
-			driveDistance(8, .7, (72280 - (260 * 80)), 10, 0, .3);
-			turnToAngle(2, 45, 8, .5, 0);
-			armGoUp(1, true);
+			 driveDistance(.7, .3, (260 * 8), 10, 0, 0);
+			driveDistance(4, .6, (260*144), 10, 0, 0);
+			//armGoUp(1, true);
 		}
 		
 		

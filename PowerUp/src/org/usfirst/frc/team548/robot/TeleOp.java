@@ -25,6 +25,8 @@ public class TeleOp {
 	
 	public static void run(){
 		//DriveTrain.preventTip();
+		
+		Elevator.setOutputLimit();
 
 		//Driver
 		DriveTrain.arcadeDrive(driver.getRightStickYAxis(), Utils.negPowTwo(driver.getLeftStickXAxis()));
@@ -52,8 +54,6 @@ public class TeleOp {
 			Ingestor.openIngest();
 		}
 		 
-	
-		
 
 		if(manip.getYButton())
 			Elevator.setElevatorIn();
@@ -85,7 +85,15 @@ public class TeleOp {
 		else
 			Elevator.setBarsIn();
 		
-			
+		
+		if(driver.getAButton()){
+			Elevator.resetEncoder();
+		}
+		
+		if(driver.getAButton()){
+			Elevator.setPosition(20000);
+		}
+		
 		
 		
 		//SmartDashboard

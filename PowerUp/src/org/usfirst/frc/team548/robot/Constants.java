@@ -44,7 +44,7 @@ public class Constants {
 	public static final int INGESTOR_SOLENOID_CLOSE_LIGHT = 5;
 	
 	//Climber
-	public static final int CLIMBER_TALON_UN = 5;
+	;public static final int CLIMBER_TALON_UN = 5;
 	public static final int CLIMBER_TALON_DEUX = 4;
 	public static final int CLIMBER_TALON_TROIS = 11;
 	

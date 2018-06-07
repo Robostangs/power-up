@@ -25,7 +25,7 @@ public class SwitchAuto2 extends AutoMode {
 		
 		/*
 		if(gameData != null && gameData.charAt(1) == 'R'){	
-		
+		//The gyro seems to be undocumented
 			
 			armGoUp(.001, true);
 			driveDistance(1, .3, (260 * 8), 10, 0, .3);
@@ -38,9 +38,18 @@ public class SwitchAuto2 extends AutoMode {
 			turnToAngle(1, -110, 25, .5, 0);
 			driveDistance(1, .5, 2080 + 20 * 260, 20, 0, 0);
 		
-		}
 		
+			
+			armGoUp(.001, true);
+			driveDistance(1, .3, (260 * 8), 10, 0, .3);
+			driveDistance(5.5, .7, (72280 - (15 * 260)), 10, 15000, .3);
+			turnToAngle(1, -50, 35, .5, 15000);
+			driveDistance(1, .5, (260 * 8), 10, 15000, .3);
+			dropCube(.5, 1, 1, 15000);
+			driveDistance(1, -.5, 12 * 260, 20, 15000, 0);
+		}
 		*/
+		
 		if(gameData != null && gameData.charAt(0) == 'R'){
 			driveDistance(.7, .3, (260 * 8), 10, 0, 0);
 			driveDistance(4, .6, (260*144), 10, 0, 0);
@@ -48,17 +57,17 @@ public class SwitchAuto2 extends AutoMode {
 			dropCube(1, .9, .9, 0);
 			driveDistance(1, .6, (260 * 15), 10, 0, 0);
 			turnToAngle(2, -90, 45, .5, 0);
-			armGoUp(.1, true);
+			//armGoUp(.1, true);
 			
 			
 			
 			
 		}
 		else{
-			driveDistance(1, .3, (260 * 8), 10, 0, .3);
-			driveDistance(8, .7, (72280 - (260 * 30)), 10, 0, .3);
-			turnToAngle(2, 90, 8, .5, 0);
-			armGoUp(1, true);
+			driveDistance(.7, .3, (260 * 8), 10, 0, 0);
+			driveDistance(4, .6, (260*144), 10, 0, 0);
+			//turnToAngle(2, 90, 8, .5, 0);
+			//armGoUp(1, true);
 		}
 		
 		

@@ -26,15 +26,16 @@ public class SwitchPriorityLeft extends AutoMode {
 		}
 		//
 		if(gameData != null && gameData.charAt(0) == 'L'){
-			driveDistance(.7, .3, (260 * 8), 10, 0, 0);
-			driveDistance(4, .6, (260*144), 10, 0, 0);
-			turnToAngle(2, -90, 45, .5, 0);
-			driveDistance(1, -.6, (260 * 30), 10, 0, 0);
+			driveDistance(.7, -.3, (260 * 8), 10, 0, 0);
+			driveDistance(4, -.6, (260*10), 10, 0, 0);
+			//turnToAngle(2, -90, 45, .5, 0);
+			turnToAngle(2, 40, 0, .5, 0);
+			/*driveDistance(1, -.6, (260 * 30), 10, 0, 0);
 			dropCube(1, .9, .9, 0);
-			driveDistance(1, .6, (260 * 15), 10, 0, 0);
+			driveDistance(1, -.6, (260 * 15), 10, 0, 0);
 			turnToAngle(2, 90, 45, .5, 0);
 			armGoUp(.1, true);
-		
+		*/
 		}
 		/*
 		else if(gameData != null && gameData.charAt(1) == 'L'){
@@ -52,8 +53,8 @@ public class SwitchPriorityLeft extends AutoMode {
 		}
 		*/
 		else{
-			driveDistance(1, .3, (260 * 8), 10, 0, .3);
-			driveDistance(8, .7, (72280 - (260 * 80)), 10, 0, .3);
+			driveDistance(1, -.3, (260 * 8), 10, 0, .3);
+			driveDistance(8, -.7, (72280 - (260 * 80)), 10, 0, .3);
 			turnToAngle(2, 45, 8, .5, 0);
 			armGoUp(1, true);
 		}

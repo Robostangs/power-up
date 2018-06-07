@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
 		autoChooser.addDefault("Switch Before Scale Right", new SwitchPriorityRight());
 		autoChooser.addDefault("Switch Before Scale Left", new SwitchPriorityLeft());
 		SmartDashboard.putData("Auto mode", autoChooser);
-		//SmartDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());
+		//SmarasdftDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());
 		
 	}
 	
@@ -53,6 +53,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		DriveTrain.resetGyro();
 		autoChooser.getSelected().start();
+		Ingestor.closeIngestor();
 	}
 
 	@Override

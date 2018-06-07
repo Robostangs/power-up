@@ -33,8 +33,8 @@ public class Elevator {
 	private Elevator(){
 		
 		
-		left = new TalonSRX(Constants.ELEVATOR_TALON_LEFT); // slave
-		right = new TalonSRX(Constants.ELEVATOR_TALON_RGIHT); // master
+		right = new TalonSRX(Constants.ELEVATOR_TALON_LEFT); // slave
+		left = new TalonSRX(Constants.ELEVATOR_TALON_RGIHT); // master
 		bottomLimitSwitch = new DigitalInput(Constants.ELEVATOR_BOTTOM_LIMITSWITCH);
 		topLimitSwitch = new DigitalInput(Constants.ELEVATOR_TOP_LIMITSWITCH);
 		right.set(ControlMode.Follower, left.getDeviceID());
@@ -48,6 +48,8 @@ public class Elevator {
 		bars = new DoubleSolenoid(6,7);
 		//right.setInverted(true);
 		left.setSensorPhase(true);
+		left.configPeakOutputForward(.5, 10);
+		left.configPeakOutputReverse(-.5, 10);
 		
 	}
 	
@@ -67,7 +69,10 @@ public class Elevator {
 	*/
 	
 	
-	
+	public static void setOutputLimit(){
+		left.configPeakOutputForward(.8, 10);
+		left.configPeakOutputReverse(-.8, 10);
+	}
 	
 	
 	public static double getPosition(){

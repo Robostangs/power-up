@@ -38,16 +38,21 @@ public class DriveStraight extends AutoMode {
 			if(DriveTrain.isConnected()){
 			
 				turnToAngle(1, -45, 30, .5, 0);
-				//taking away 2938
 				driveDistance(2, -.7, (20057 - 2938), 10, 0, 0);
 				turnToAngle(2, 45, 30, .5, 0);
+				System.out.println("3");
 				driveDistance(1, -.5, (260 * 28), 10, 0, 0);
+				System.out.println("4");
 				dropCube(1, .7, .7, 0);
+				System.out.println("5");
 				//armGoUp(.1, true);
 				driveDistance(2, .5, (260 * 8), 10, 0, 0);
+				System.out.println("6");
 				turnToAngle(1, 90, 13, .5, 0);
+				System.out.println("7");
 			}
 			else{
+				System.out.println("NO GYRO");
 				turnToAngle(.4, -90, 13, .5, 0);
 				driveDistance(1, -.5, (260 * 20), 10, 0, 0);
 			}
@@ -66,6 +71,7 @@ public class DriveStraight extends AutoMode {
 				//turnToAngle(1, -90, 13, .5, 0);
 			}
 			else{
+				System.out.println("NO GYRO");
 				turnToAngle(.4, -90, 13, .5, 0);
 				driveDistance(1, -.5, (260 * 20), 10, 0, 0);
 			}
