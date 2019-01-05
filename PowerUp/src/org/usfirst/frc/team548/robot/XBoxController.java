@@ -125,4 +125,11 @@ public class XBoxController extends Joystick{
 		return (getRawAxis(3)-getRawAxis(2));
 	}
 	
+	public boolean isButtonClicked(){
+		if(this.getLeftBumper()){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

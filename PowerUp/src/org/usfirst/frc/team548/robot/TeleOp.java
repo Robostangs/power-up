@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TeleOp {
 	private static XBoxController driver, manip;
 	private static TeleOp instance;
-	
+		
 	public static TeleOp getInstance() {
 		if (instance == null)
 			instance = new TeleOp();
@@ -25,62 +25,40 @@ public class TeleOp {
 	
 	public static void run(){
 		//DriveTrain.preventTip();
+		Elevator.setOutputLimit();
 
 		//Driver
 		DriveTrain.arcadeDrive(driver.getRightStickYAxis(), Utils.negPowTwo(driver.getLeftStickXAxis()));
 		
+		//Two Drivers
+		
 		if(driver.getRightBumper()){
-			DriveTrain.setHighGear(false);
+			DriveTrain.setHighGear(true);
 		}
 		else
-			DriveTrain.setHighGear(true);	
+			DriveTrain.setHighGear(false);	
 		
-		//Manip
-		
-		
-		
-		
+		//Manip		
 		if(manip.getRightBumper())
 			Climber.climb(manip.getRightStickYAxis());
-		else{ 
+		else { 
 			Elevator.setPower(manip.getRightStickYAxis());
 			Climber.climb(0);
 		}
+		//gkj
 		
-		/*
-		if(manip.getLeftStickYAxis() > .5){
-			Ingestor.ingestCurentLimiting();
-				if (Ingestor.isCubeInIngestor()) {
-					manip.setLeftRumble(1);
-					driver.setLeftRumble(1);
-
-				} else {
-					manip.setLeftRumble(0);
-					driver.setLeftRumble(0);
-				}
-		}
-		*/
-		if(driver.getAButton())
-			DriveTrain.resetEncoder();
-		if(driver.getBButton())
-			DriveTrain.resetGyro();
-		if(driver.getXButton())
-			Elevator.resetEncoder();;
-		if(manip.getYButton())
-			Elevator.setElevatorIn();
-		else
-				Elevator.setElevatorOut();
+	
 		
 		if(manip.getLeftBumper())
 			Ingestor.closeIngestor();
-		else
+		else{ 
 			Ingestor.openIngest();
+		}
+				if(manip.getYButton())
+			Elevator.setElevatorIn();
+		else
+			Elevator.setElevatorOut();
 		
-		//else //Jason uncommented lines 56 and 57 on 3/10/18 after kurt left because elevator wasn't unfolding.
-		//	Elevator.setElevatorOut();
-		//else
-		//	Elevator.setElevatorOut();
-		//Ingestor.ingestCurentLimiting();
 		
 		
 		
@@ -98,33 +76,87 @@ public class TeleOp {
 		}
 		else 
 			Ingestor.bothControl(-manip.getLeftStickYAxis());
-			
 		
-		//Ingestor.ingestCurentLimiting();
-		if(Ingestor.isCubeInIngestor()){
-			manip.setLeftRumble(1);
-			driver.setLeftRumble(1);
-		}
-		else{
-			manip.setLeftRumble(0);
-			driver.setLeftRumble(0);
-		}
-		//asdfj}
 		
-		if(driver.getBButton()){
+		
+		if(manip.getBButton())
+			Elevator.setBarsOut();
+		else
+			Elevator.setBarsIn();
+		
+		
+		if(driver.getAButton()){
 			Elevator.resetEncoder();
 		}
 		
 		if(driver.getAButton()){
-			
-			Elevator.setPosition(55000);
+			Elevator.setPosition(20000);
 		}
 		
 		
-		//Ingestor.rightControl(manip.getRightTriggerAxis());
-		//Ingestor.leftControl(manip.getLeftTriggerAxis());
+		//one Driver
 		
-		//SmartDashboard
+/*		if(driver.getYButton()){
+*			DriveTrain.setHighGear(true);
+*		}
+*		else
+*			DriveTrain.setHighGear(false);
+*		
+*		
+*				
+*		if(driver.getXButton())
+*			Climber.climb(driver.getRightStickYAxis());
+*		else { 
+*			Elevator.setPower(driver.getRightTriggerAxis()-driver.getLeftTriggerAxis());
+*			Climber.climb(0);
+*		}
+*				//gkj
+*				
+*				
+*
+*		if(driver.getLeftJoystickButton())
+*			Ingestor.closeIngestor();
+*		else{ 
+*			Ingestor.openIngest();
+*		}
+*				 
+*		
+*		if(driver.getStartButton())
+*			Elevator.setElevatorIn();
+*		else
+*			Elevator.setElevatorOut();
+*				
+*				
+*				
+*				
+*		if(driver.getRightBumper()){
+*			Ingestor.bothControl(-.7);
+*		}
+*		else if(driver.getLeftBumper()){
+*			Ingestor.bothControl(.7);
+*		}
+*		else
+*			Ingestor.bothControl(0.1);
+*/		
+				
+				
+				
+				/*if(manip.getBButton())
+					Elevator.setBarsOut();
+				else
+					Elevator.setBarsIn();
+				
+				
+				if(driver.getAButton()){
+					Elevator.resetEncoder();
+				}
+				
+				if(driver.getAButton()){
+					Elevator.setPosition(20000);
+				}
+				*/
+				//SmartDashboard
+		SmartDashboard.putNumber("DT Gryo", DriveTrain.getAngle());
 		SmartDashboard.putNumber("DT Encoder", DriveTrain.getEncoderAverage());
 		//SmartDashboard.putNumber("Pitch", DriveTrain.getRoll());
 		SmartDashboard.putNumber("eleavtor encoder", Elevator.getPosition());
@@ -132,8 +164,8 @@ public class TeleOp {
 		//SmartDashboard.putBoolean("Limit Switch Error", Elevator.checkLimitSwitches(Elevator.getBottomLimitSwitch()));
 		SmartDashboard.putBoolean("Switch", Elevator.getBottomLimitSwitch());
 		SmartDashboard.putNumber("xbox", manip.getLeftStickYAxis());
-		SmartDashboard.putNumber("Elevator power", Elevator.getAmountPower());	
-		SmartDashboard.putBoolean("Gyro", DriveTrain.isConnected());
+		SmartDashboard.putNumber("Elevator power", Elevator.getAmountPower());
+		SmartDashboard.putBoolean("GYRO", DriveTrain.isConnected());
 	}
 	
 }

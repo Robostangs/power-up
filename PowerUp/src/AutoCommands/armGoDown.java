@@ -2,13 +2,13 @@ package AutoCommands;
 
 import org.usfirst.frc.team548.robot.Elevator;
 
-public class ArmGoUp extends AutoCommandBase {
+public class armGoDown extends AutoCommandBase {
 	public static boolean position;
 	
-	public ArmGoUp(double timeOut, boolean pos) {
+	public armGoDown(double timeOut, boolean pos) {
 		super(timeOut);
 		this.position = pos;
-		// TODO Auto-generated constructor stub
+		// TODO Auto-genearmGoDownrated constructor stub
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class ArmGoUp extends AutoCommandBase {
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		Elevator.setElevatorOut();
+		Elevator.setElevatorIn();
 		////Elevator.setPosition(0);
 	}
 	
@@ -30,7 +30,7 @@ public class ArmGoUp extends AutoCommandBase {
 	@Override
 	public void end() {
 		// TODO Auto-generated method stub
-		Elevator.setElevatorOut();
+		Elevator.setElevatorIn();
 		Elevator.setPosition(0);
 	}
 

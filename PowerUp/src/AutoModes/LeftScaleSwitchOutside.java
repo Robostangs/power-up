@@ -5,7 +5,7 @@ import org.usfirst.frc.team548.robot.Ingestor;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
-public class SwitchAuto extends AutoMode {
+public class LeftScaleSwitchOutside extends AutoMode {
 
 	@Override
 	protected void run() {
@@ -39,21 +39,8 @@ public class SwitchAuto extends AutoMode {
 			//turnToAngle(1.2, -120, 15, .5, 18750);
 			dtTurnToAngle(1.25, -115, .7, 22000, .3);
 			driveDistance(1.25, .85, 10000, 10, 22000, .3);
-			dropCube(.3, .7, .7, 22000);
-			//driveDistance(.6, -.85, (-2500), 20, -50000, 0);
-			dtTurnToAngle(1.25, 95, 0.6, -55000, 0);
-			Ingestor.openIngest();
-			driveDistance(1.5, .9, (22500), 20, -50000, 1);
-			driveDistance(0.75, 0, 0, 0, -50000, 1);
-			Ingestor.closeIngestor();
-			driveDistance(0.3, 0, 0, 0, -50000, 1);
-			driveDistance(1.5, -.9, 22000, 20, 0, 0);
-			dtTurnToAngle(1.1, -70, 0.9, 22000, 1);
-			driveDistance(1.5, .85, (5000), 20, 22000, 0);
-			dropCube(.5, 1, 1, 22000);
-			//OLD driveDistance(1, -.5, 2080 + 9 * 260, 20, 10000, 0);
-			//turnToAngle(1, 110, 25, .5, 0);
-			//driveDistance(1, .5, 2080 + 20 * 260, 20, 0, 0);
+			dropCube(.7, .7, .7, 22000);
+			driveDistance(3, -.6, (-20000), 20, -50000, 0);
 			
 			
 			}
