@@ -16,14 +16,13 @@ public class Climber {
 	private Climber(){
 		talonUn = new TalonSRX(Constants.CLIMBER_TALON_UN); //Master
 		talonDeux = new TalonSRX(Constants.CLIMBER_TALON_DEUX); //Slave
-		talonTrois = new TalonSRX(Constants.CLIMBER_TALON_TROIS); //Slave
-		
+		talonTrois = new TalonSRX(Constants.CLIMBER_TALON_TROIS); //Master
+		talonDeux.set(ControlMode.Follower, talonUn.getDeviceID());
+		talonTrois.set(ControlMode.Follower, talonUn.getDeviceID());
 	}
 	
 	public static void climb(double power){
 		talonUn.set(ControlMode.PercentOutput, power);
-		talonDeux.set(ControlMode.PercentOutput, power);
-		talonTrois.set(ControlMode.PercentOutput, power);
 	}
 	
 	

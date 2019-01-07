@@ -5,7 +5,7 @@ import org.usfirst.frc.team548.robot.Ingestor;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
-public class SwitchAuto extends AutoMode {
+public class LeftCross extends AutoMode {
 
 	@Override
 	protected void run() {
@@ -59,19 +59,20 @@ public class SwitchAuto extends AutoMode {
 			}
 			
 		
-		else if(gameData != null && gameData.charAt(0) == 'L'){
+		else if(gameData != null && gameData.charAt(1) == 'R'){
 			Ingestor.closeIngestor();
-			armGoDown(.1, true);
-			driveDistance(.7, -.3, (260 * 8), 10, 0, 0);
-			driveDistance(4, -.6, (40000), 10, 0, 0);
-			dtTurnToAngle(2, 80, 5, 0, 0);
-			driveDistance(1, -.6, (1500 * 50), 10, 0, 0);
-			dropCube(1, .9, .9, 0);
-			driveDistance(1, .6, 3000, 10, 0, 0);
+			armGoUp(.001, true);
+			driveDistance(3.8, -.9, 65000, 10, 0, .3);
+			dtTurnToAngle(1.5, 95, .35, 0, .3);
+			driveDistance(4.25, -.9, 51000, 10, -30000, .3);
+			dtTurnToAngle(1.5, 87, .35, 22000, .3);
+			driveDistance(1.5, .7, 15000, 10, 22000, .3);
+			dropCube(.5, 1, 1, 22000);
+			driveDistance(1.5, -.7, 10000, 10, 22000, .3);
+			dtTurnToAngle(1.5, 180, .35, -50000, .3);
 			//dtTurnToAngle(2,-52.5,50,.5);
 			//driveDistance(1, -.6, (260 * 25), 10, 0, 0);
-			armGoUp(3, true);
-			driveDistance(2, 0, 0, -50000, 0, 0);
+			//driveDistance(2, 0, 0, -50000, 0, 0);
 					
 		}
 		else{

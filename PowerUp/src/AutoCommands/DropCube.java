@@ -2,6 +2,7 @@ package AutoCommands;
 
 import org.usfirst.frc.team548.robot.Elevator;
 import org.usfirst.frc.team548.robot.Ingestor;
+import org.usfirst.frc.team548.robot.TeleOp;
 
 public class DropCube extends AutoCommandBase {
 	private double powerLeft, powerRight, elevatorSetPoint;
@@ -33,6 +34,8 @@ public class DropCube extends AutoCommandBase {
 	public void end() {
 		// TODO Auto-generated method stub
 		Ingestor.stop();
+
+
 		//Elevator.setElevatorOut();
 		
 	}

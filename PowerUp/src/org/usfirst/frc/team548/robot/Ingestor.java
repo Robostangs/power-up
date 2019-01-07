@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 
 public class Ingestor {
@@ -12,7 +13,8 @@ public class Ingestor {
 	private static TalonSRX right, left;
 	private static boolean currentLimiting = false, startedTimer = false;
 	private static Timer currentTimer;
-	private static DoubleSolenoid ingestHer;
+	//private static Solenoid closeHeavy, closeLight;
+	private static DoubleSolenoid ingestSol;
 	
 	public static Ingestor getInstance(){
 		if(instance == null)
@@ -23,7 +25,9 @@ public class Ingestor {
 	private Ingestor(){
 		right = new TalonSRX(Constants.INGESTOR_TALON_RIGHT);
 		left = new TalonSRX(Constants.INGESTOR_TALONG_LEFT);
-		ingestHer = new DoubleSolenoid(1, 0);
+	//	closeHeavy = new Solenoid(Constants.INGESTOR_SOLENOID_CLOSE_HEAVY);
+	//	closeLight = new Solenoid(4);
+		ingestSol = new DoubleSolenoid(4,0);
 		currentTimer = new Timer();
 	}
 	
@@ -47,7 +51,7 @@ public class Ingestor {
 		}
 		else{
 			right.set(ControlMode.PercentOutput, .25);
-			left.set(ControlMode.PercentOutput, .25);
+			left.set(ControlMode.PercentOutput, .7);
 			if(Robot.PDP.getCurrent(Constants.INGESTOR_CURRENT_CONSTANT) < 1);
 				currentLimiting = false;
 		}
@@ -58,10 +62,23 @@ public class Ingestor {
 			stop();
 		}
 		else{
-		right.set(ControlMode.PercentOutput, -power);
-		left.set(ControlMode.PercentOutput, power);
+		right.set(ControlMode.PercentOutput, power);
+		left.set(ControlMode.PercentOutput, -power);
 		}
 	}
+	
+	
+	
+	public static void openIngest(){
+		ingestSol.set(DoubleSolenoid.Value.kForward);
+	}
+	
+	public static void closeIngestor(){
+		ingestSol.set(DoubleSolenoid.Value.kReverse);
+	}
+	
+	
+	
 	
 	public static void stop(){
 		right.set(ControlMode.PercentOutput, 0);
@@ -69,24 +86,14 @@ public class Ingestor {
 	}
 	
 	public static void leftControl(double power){
-		left.set(ControlMode.PercentOutput, power);
-	}
-	
-	public static void openIngest(){
-		ingestHer.set(DoubleSolenoid.Value.kForward);
-	}
-	
-	public static void closeIngestor(){
-		ingestHer.set(DoubleSolenoid.Value.kReverse);
+		left.set(ControlMode.PercentOutput, -power);
 	}
 	
 	public static void rightControl(double power){
-		right.set(ControlMode.PercentOutput, -power);
+		right.set(ControlMode.PercentOutput, power);
 	}
 	
-	public static boolean isCubeInIngestor() {
+	public static boolean isGearInIngestor() {
 		return currentLimiting;
 	}
-	
-	
 }

@@ -38,7 +38,7 @@ public class TurnToAngle extends AutoCommandBase {
 				DriveTrain.arcadeDrive(0, power);
 			else if(DriveTrain.getAngle() < angle && DriveTrain.getAngle() > angle - angleOffSet)
 				DriveTrain.arcadeDrive(0, .15);
-			Elevator.setPosition(elevatorSetPoint);
+		//	Elevator.setPosition(elevatorSetPoint);
 		}
 		else{
 			if(DriveTrain.getAngle() > (angle + angleOffSet))

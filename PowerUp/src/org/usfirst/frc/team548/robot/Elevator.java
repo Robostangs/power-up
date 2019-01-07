@@ -16,7 +16,7 @@ public class Elevator {
 	private static Elevator instance;
 	private static DigitalInput bottomLimitSwitch, topLimitSwitch;
 	private static PIDController pid;
-	private static DoubleSolenoid whip1;
+	private static DoubleSolenoid whip1, bars;
 	
 	
 	
@@ -30,28 +30,30 @@ public class Elevator {
 	}
 	
 	private Elevator(){
-		left = new TalonSRX(Constants.ELEVATOR_TALON_LEFT); // master
-		right = new TalonSRX(Constants.ELEVATOR_TALON_RGIHT); // slave
+		
+		
+		right = new TalonSRX(Constants.ELEVATOR_TALON_LEFT); // slave
+		left = new TalonSRX(Constants.ELEVATOR_TALON_RGIHT); // master
 		bottomLimitSwitch = new DigitalInput(Constants.ELEVATOR_BOTTOM_LIMITSWITCH);
 		topLimitSwitch = new DigitalInput(Constants.ELEVATOR_TOP_LIMITSWITCH);
 		right.set(ControlMode.Follower, left.getDeviceID());
 		left.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-		whip1 = new DoubleSolenoid(2, 3);
+		whip1 = new DoubleSolenoid(Constants.ELEVATOR_SOLENOID2, Constants.ELEVATOR_SOLENOID1);
 		left.config_kP(0, Constants.ELEAVTOR_PID_P, 0);
 		left.config_kI(0, Constants.ELEAVTOR_PID_I, 0);
 		left.config_kD(0, Constants.ELEAVTOR_PID_D, 0);
 		left.config_kF(0, Constants.ELEAVTOR_PID_F, 0);
-		left.configPeakOutputForward(.5, 10);
-		left.configPeakOutputReverse(-.5, 10);
-		
-		
 		//left.setInverted(false);
+		bars = new DoubleSolenoid(6,7);
 		//right.setInverted(true);
 		left.setSensorPhase(true);
+		left.configPeakOutputForward(.5, 10);
+		left.configPeakOutputReverse(-.5, 10);
 		
 	}
 	
 	public static void setPower(double power){
+		
 		if(Math.abs(power) < .1)
 			Elevator.stop();
 		else
@@ -64,6 +66,14 @@ public class Elevator {
 			left.set(ControlMode.PercentOutput, .14);
 	}
 	*/
+	
+	
+	public static void setOutputLimit(){
+		left.configPeakOutputForward(1, 10);
+		left.configPeakOutputReverse(-1, 10);
+	}
+	
+	
 	
 	public static double getPosition(){
 		return left.getSelectedSensorPosition(0);
@@ -127,6 +137,15 @@ public class Elevator {
 	
 	public static void setElevatorIn(){
 		whip1.set(DoubleSolenoid.Value.kReverse);
+	}
+	
+	
+	public static void setBarsOut(){
+		bars.set(DoubleSolenoid.Value.kForward);
+	}
+	
+	public static void setBarsIn(){
+		bars.set(DoubleSolenoid.Value.kReverse);
 	}
 	
 	public static boolean checkLimitSwitches(boolean limitSwitch){

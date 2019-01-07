@@ -4,18 +4,25 @@ import org.usfirst.frc.team548.robot.DriveTrain;
 import org.usfirst.frc.team548.robot.Elevator;
 import org.usfirst.frc.team548.robot.Ingestor;
 
-public class DriveDistance extends AutoCommandBase{
-	private double power, distance, threshold, elevatorSetPoint, ingestorPower;
+public class DT_DriveDistance extends AutoCommandBase{
+	private double power;
+	private double elevatorSetPoint;
+	private double ingestorPower;
+	private double distance;
+	private final double kP = 0.03;
 	
-	public DriveDistance(double timeOut, double power, double distance, double elevatorSetPoint, double ingestorPower){
+	public DT_DriveDistance(double timeOut, double power, double distance, double elevatorSetPoint, double ingestorPower) {
 		super(timeOut);
+		
 		this.power = power;
-		this.distance = distance;
 		this.elevatorSetPoint = elevatorSetPoint;
 		this.ingestorPower = ingestorPower;
+		// TODO Auto-generated constructor stub
 	}
-	
-	public void init(){
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
 		DriveTrain.resetEncoder();
 		DriveTrain.resetGyro();
 	}
@@ -23,17 +30,15 @@ public class DriveDistance extends AutoCommandBase{
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		if(Math.abs(DriveTrain.getEncoderAverage()) < Math.abs(distance)){
-			DriveTrain.driveStraight(power);
-			Elevator.setPosition(elevatorSetPoint);
-			Ingestor.bothControl(ingestorPower);
-		}
-		else
+		if(Math.abs(Math.abs(DriveTrain.getEncoderAverage())) < Math.abs(distance)){
+			double angle = DriveTrain.getAngle();
+			DriveTrain.pidDriveStraight(0.5);
+		}else{
 			DriveTrain.stop();
 			Elevator.setPosition(elevatorSetPoint);
 			Ingestor.bothControl(ingestorPower);
-		//DriveTrain.resetGyro();
-		
+		}
+
 	}
 
 	@Override
@@ -42,14 +47,18 @@ public class DriveDistance extends AutoCommandBase{
 		DriveTrain.stop();
 		DriveTrain.resetGyro();
 		DriveTrain.resetEncoder();
+		DriveTrain.disablePID();
+		
 		Elevator.setPosition(elevatorSetPoint);
 		Ingestor.bothControl(ingestorPower);
+
 	}
 
 	@Override
 	protected String getCommandName() {
 		// TODO Auto-generated method stub
-		return "Drive Distance";
+		return "Better Drive Distance";
 	}
+	
 	
 }

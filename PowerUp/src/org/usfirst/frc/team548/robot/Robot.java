@@ -7,26 +7,38 @@
 
 package org.usfirst.frc.team548.robot;
 
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
+import com.kauailabs.navx.frc.AHRS;
 
+import AutoModes.AutoLine;
 import AutoModes.AutoMode;
 import AutoModes.DriveStraight;
-import AutoModes.LeftGoAround;
+import AutoModes.RightSwitchRightScale;
 import AutoModes.SwitchAuto;
 import AutoModes.SwitchAuto2;
-import AutoModes.TestStuff;
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
+import AutoModes.SwitchPriorityLeft;
+import AutoModes.SwitchPriorityRight;
+import AutoModes.LeftScaleSwitchOutside;
+import AutoModes.RightScaleSwitchOutside;
+import AutoModes.RightCross;           
+import AutoModes.LeftCross;
+//import AutoModes.Beesswervecode;
+//import AutoModes.BeesPID;
+//import AutoModes.5cubeauto;
+//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
+	
+	public Robot(){
+		
+		AHRS ahrs = new AHRS(SerialPort.Port.kUSB); 
+		/* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+		
+	}
 	
 	AutoMode autonCommand;
 	SendableChooser<AutoMode> autoChooser;
@@ -40,43 +52,45 @@ public class Robot extends IterativeRobot {
 		Elevator.getInstance();
 		Ingestor.getInstance();
 		Climber.getInstance();
+		//USBLED.getInstance();
+		//CameraServer.getInstance().startAutomaticCapture();
 		PDP = new PowerDistributionPanel();
 		
 		autoChooser = new SendableChooser<AutoMode>();
-		autoChooser.addDefault("Decision Middle", new DriveStraight());
-		autoChooser.addDefault("left goaround",new LeftGoAround());
+		autoChooser.addDefault("Center Switch", new DriveStraight());
+		autoChooser.addDefault("Cross Baseline", new AutoLine());
+		//autoChooser.addDefault("Scale/Switch Left", new SwitchAuto1());
 		autoChooser.addDefault("Scale/Switch Left", new SwitchAuto());
-		autoChooser.addDefault("Scale/Switch Right", new SwitchAuto2());
-		autoChooser.addDefault("Test Stuff", new TestStuff());
-		try{
-		UsbCamera camera =  CameraServer.getInstance().startAutomaticCapture();
-		camera.setResolution(480, 320);
-		SmartDashboard.putNumber("Brightness", camera.getBrightness());
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		
+		autoChooser.addDefault("Scale/Switch Right", new RightSwitchRightScale());
+		autoChooser.addDefault("Switch/Scale Left", new SwitchPriorityLeft());
+		autoChooser.addDefault("Switch/Scale Right", new SwitchPriorityRight());
+		autoChooser.addDefault("Left Scale for alliance two cube/switch", new LeftScaleSwitchOutside());
+		autoChooser.addDefault("Right Scale for alliance two cube/switch", new RightScaleSwitchOutside());
+		autoChooser.addDefault("Cross Scale Right", new RightCross());
+		autoChooser.addDefault("Cross Scale Left", new LeftCross());
+		autoChooser.addDefault("Pick your auto",  new SwitchAuto2());
 		SmartDashboard.putData("Auto mode", autoChooser);
-		//SmartDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());
-        
+		//SmartDashboard.putData("Is Gyro Connected?", DriveTrain.isConnected());
+		SmartDashboard.putBoolean("Gyro Connection", DriveTrain.isConnected());
+		//SmarasdftDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());
+		DriveTrain.resetGyro();
+		DriveTrain.resetEncoder();
 	}
-
-		
-	
 	
 	@Override
 	public void autonomousInit() {
 		DriveTrain.resetGyro();
-		DriveTrain.resetEncoder();
-		DriveTrain.resetGyro();
 		autoChooser.getSelected().start();
+		Ingestor.openIngest();
 	}
 
 	@Override
 	public void autonomousPeriodic() {
 		SmartDashboard.putNumber("Drive Train", DriveTrain.getEncoderAverage());
 		SmartDashboard.putNumber("AUTO GYRO", DriveTrain.getAngle());
-		//SmartDashboard.putNumber("PID Error", DriveTrain.getPIDError());
+		System.out.println("Gyro: " + DriveTrain.isConnected());
+		System.out.println(DriveTrain.isConnected());
+		//SmartDashboard.putBoolean("Is Gyro Connected", DriveTrain.isConnected());
 	}
 
 	@Override

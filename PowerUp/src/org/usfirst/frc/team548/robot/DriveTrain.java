@@ -7,9 +7,10 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DriveTrain implements PIDOutput {
@@ -25,21 +26,25 @@ public static DriveTrain instance;
 	private static Solenoid sol;
 	private static AHRS hyro;
 	private static PIDController pid;
+	private static Servo tip, ramp;
 	
 	private DriveTrain(){
+		//ramp = new Servo(1);
+		tip = new Servo(1);
 		rightFront = new TalonSRX(Constants.DT_TALON_RIGHTFRONT); // has encoder
 		rightBack = new TalonSRX(Constants.DT_TALON_RIGHTBACK);
 		leftFront = new TalonSRX(Constants.DT_TALON_LEFTFRONT);
 		leftBack = new TalonSRX(Constants.DT_TALON_LEFTBACK); // has encoder
 		sol = new Solenoid(Constants.DT_SOLENOID_SHIFTER);
-		hyro = new AHRS(SerialPort.Port.kUSB1);
+		//hyro = new AHRS(SerialPort.Port.kUSB2);
+		hyro = new AHRS(SPI.Port.kMXP);
 		rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		leftBack.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		pid = new PIDController(Constants.DT_PID_P, Constants.DT_PID_I, Constants.DT_PID_D, hyro, this);
 		pid.setInputRange(-180.0f,  180.0f);
-		pid.setOutputRange(-0.5f, 0.5f);
+		pid.setOutputRange(-0.7f, 0.7f);
 		pid.setAbsoluteTolerance(2f);
-        
+        pid.setContinuous(true);
 	}
 	
 	public static void drive(double leftPower, double rightPower){
@@ -47,7 +52,6 @@ public static DriveTrain instance;
 		rightBack.set(ControlMode.PercentOutput, -rightPower);
 		leftBack.set(ControlMode.PercentOutput, leftPower);
 		leftFront.set(ControlMode.PercentOutput, leftPower);
-		//DriveTrain.turnToAngle(90);
 	}
 	
 	public static void arcadeDrive(double fwd, double tur) {
@@ -59,7 +63,7 @@ public static DriveTrain instance;
 	}
 	
 	public static void setHighGear(boolean b){
-		sol.set(!b);
+		sol.set(b);
 	}
 	
 	public static double getAngle(){
@@ -75,22 +79,35 @@ public static DriveTrain instance;
 		return -(leftBack.getSelectedSensorPosition(0));
 	}
 	
-	public static double getPIDError(){
-		return pid.getError();
-	}
-	
 	public static void resetEncoder(){
 		leftBack.setSelectedSensorPosition(0, 0, 10);
 		rightFront.setSelectedSensorPosition(0, 0, 10);
 		
 	}
 	
+	public static void rampOut(){
+		ramp.set(1);
+	}
+	
+	public static void rampIn(){
+		ramp.set(.5);
+	}
+	
+	public static void tipIn(){
+		tip.set(.5);
+	}
+	
+	public static void tipOut(){
+		tip.set(0);
+	}
 	
 	public static double getEncoderAverage(){
+		/*
 		if(getLeftEncoderDistance() > getRightEncoderDistance()){
-			return getRightEncoderDistance();
+			return getLeftEncoderDistance();
 		}
 		else
+		*/
 			return getRightEncoderDistance();
 	}
 	
@@ -102,21 +119,21 @@ public static DriveTrain instance;
 		}
 	}
 	
+	
+	public static void drivePID(double angle){
+		
+	}
 	public static void disablePID() {
 		pid.disable();
 	}
 	
-	public static void resetPID(){
-		pid.reset();
-	}
-	
 	public void pidWrite(double output) {
-		if(Math.abs(pid.getError()) < 90d){
-			pid.setPID(pid.getP(), pid.getI(), pid.getD());
+		if(Math.abs(pid.getError()) < 5d){
+			pid.setPID(pid.getP(), .001, 0);
 		}
 		else
-		pid.setPID(pid.getP(), 0.001, 0.0);
-			drive(output, -output);	
+			pid.setPID(pid.getP(), 0, 0);
+		drive(output, -output);	
 	}
 	
 	public static void resetGyro(){
@@ -147,14 +164,13 @@ public static DriveTrain instance;
 		
 	}
 	
-	
-	public static boolean isConnected(){
-		return hyro.isConnected();
-	}
-	
-	
-	public static double getRightPower(){
-		return rightFront.getMotorOutputPercent();
+	public static void pidDriveStraight(double power){
+		pid.setSetpoint(0);
+		if(!pid.isEnabled()){
+			pid.reset();
+			pid.enable();
+			drive(power, power);
+		}
 	}
 	
 	public static double getPitch(){
@@ -166,6 +182,10 @@ public static DriveTrain instance;
 		rightBack.set(ControlMode.PercentOutput, 0);
 		leftBack.set(ControlMode.PercentOutput, 0);
 		leftFront.set(ControlMode.PercentOutput, 0);
+	}
+	
+	public static boolean isConnected(){
+		return hyro.isConnected();
 	}
 	
 	public static void preventTip(){
